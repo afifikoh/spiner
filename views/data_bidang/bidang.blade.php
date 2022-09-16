@@ -28,25 +28,24 @@
               <div class="col-12">
                   <div class="card">
                     <div class="card-header">
-                      <div class="col-sm-6">
-                      <h3 class="card-title">Data List Bidang</h3>
-                      </div>
-                      <div class="col-sm-2 float-right">
-                        <div class="input-group input-group-sm" style="width: 168px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                        <div class="input-group-append">
-                        <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                        </button>
+                      <div class="row">
+                        <div class="col-sm-12 col-md-9"></div>
+                        <div class="col-sm-12 col-md-3">
+                            <form action="" method="get">
+                                <div class="col-sm-3">
+                                  <div class="input-group mb-3" style="width: 240px;">
+                                    <input type="text" name="keyword" class="form-control " placeholder="Search">
+                                    <button type="submit" class="input-group-text btn btn-default "><i class="fas fa-search"></i></button>
+                                  </div>
+                                </div>
+                              </form>
                         </div>
-                      </div>
-                      </div>
                     </div>
                     
                     
                     <!-- /.card-header -->
-                    <div class="card-body">
-                      
+                    <div class="row">
+                      <div class="col-sm-12">
                       <table id="example2" class="table table-bordered table-hover dataTable dtr-inline collapsed">
                         <thead>
                         <tr>
@@ -58,10 +57,11 @@
                         </tr>
                         </thead>
                         <tbody>
+                          @php $no=1; @endphp
                           @foreach ($bidang as $data)
                           <tr class="odd">
                             
-                            <td>{{ $data['id'] }}</td>
+                            <td>{{ $no++ }}</td>
                             <td>{{ $data['kd_dinas'] }}</td>
                             <td>{{ $data['kd_bidang'] }}</td>
                             <td>{{ $data['bidang'] }}</td>
@@ -80,6 +80,11 @@
                           @endforeach
                         </tbody>
                       </table>
+                      <div class="my-2">
+                        {{ $bidang->links() }}
+                      </div>
+                    
+                      </div>
                     </div>
                   </div>
               </div>

@@ -1,4 +1,4 @@
-@extends('data_pegawai/panel')
+@extends('layout.main')
 
 @section('judul')
     <section class="content-header">
@@ -19,27 +19,27 @@
                 <div class="col-12">        
                     <div class="card">
                         <div class="card-body">
-                            @foreach ($bidang as $data)
-                            <form action="bidang-edit/{{ $data->id }}" method="POST">
-                                
-                                @method('PUT')
+                            
+                            <form action="/bidang/update/{{ $bidang->id }}" method="POST">
                                 @csrf
+                                @method('PUT')
+                                
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="kd_dinas">Kode Dinas</label>
-                                        <input type="text" name="kd_dinas" class="form-control" id="kd_dinas" value="{{ $data->kd_dinas }}" readonly >
+                                        <input type="text" name="kd_dinas" class="form-control" id="kd_dinas" value="{{ $bidang->kd_dinas }}" readonly >
                                      </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="kd_dinas">Kode Bidang</label>
-                                        <input type="text" name="kd_bidang" class="form-control" id="kd_bidang" value="{{ $data->kd_bidang }}" required>
+                                        <input type="text" name="kd_bidang" class="form-control" id="kd_bidang" value="{{ $bidang->kd_bidang }}" required>
                                      </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="bidang">Nama Bidang</label>
-                                        <input type="text" name="bidang" class="form-control" id="bidang" value="{{ $data->bidang }}" required>
+                                        <input type="text" name="bidang" class="form-control" id="bidang" value="{{ $bidang->bidang }}" required>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -48,7 +48,7 @@
                                     <button type="cancel" class="btn btn-default float-sm">Batal</button>
                                 </div>
                             </form>
-                            @endforeach
+                            
                         </div>
                     </div>
                 </div>
