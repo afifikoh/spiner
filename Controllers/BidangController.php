@@ -16,7 +16,7 @@ class BidangController extends Controller
         $keyword = $request->keyword;
         $bidang = Bidang::where('kd_bidang','LIKE', '%'.$keyword.'%')
         ->orWhere('bidang','LIKE', '%'.$keyword.'%')
-        ->paginate(2);
+        ->paginate();
         return view("data_bidang.bidang",compact('bidang'))->with([
             "user" => $user,
         ]);

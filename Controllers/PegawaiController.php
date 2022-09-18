@@ -25,7 +25,7 @@ class PegawaiController extends Controller
         ->orWhere('alamat','LIKE', '%'.$keyword.'%')
         ->orWhere('email','LIKE', '%'.$keyword.'%')
         ->orWhere('level','LIKE', '%'.$keyword.'%')
-        ->paginate(3);
+        ->paginate();
         return view('data_pegawai.pegawai', compact('users'))
         ->with([
             "user" => $user,
