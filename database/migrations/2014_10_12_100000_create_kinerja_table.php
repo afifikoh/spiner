@@ -1,5 +1,6 @@
 <?php
 
+use iluminate\Broadcasting\Channel;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,15 +15,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kinerja', function (Blueprint $table) {
-            $table->id();
-            $table->string('kd_dinas');
-            $table->string('bidang');
-            $table->string('nip');
-            $table->date('tanggal');
-            $table->string('waktu');
+            $table->increments('id');
+            // $table->string('kd_dinas');
+            // $table->string('bidang');
+            // $table->string('nip');
+            
+            // $table->string('waktu');
             $table->string('hasil');
-            $table->string('bukti');
-            $table->string('status');
+            $table->text('foto')->nullable();
+            $table->text('doc')->nullable();
+            $table->string('tgl');
+            // $table->string('status');
             $table->timestamps();
         });
     }
