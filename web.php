@@ -6,6 +6,7 @@ use App\Http\Controllers\LayoutController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BidangController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\KinerjaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,19 +43,27 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::get('tambah-pegawai', [PegawaiController::class,'create']);
         Route::post('pegawai-add', [PegawaiController::class,'store']);
 
+        Route::get('edit-pegawai/{id}', [PegawaiController::class,'edit']);
+        Route::post('/pegawai/update/{id}', [PegawaiController::class,'update']);
+        Route::get('hapus-pegawai/{id}', [PegawaiController::class,'destroy']);
+
         Route::get("bidang",  [BidangController::class,'index']);
-        Route::get('bidang', [BidangController::class,'index','store']);
+        Route::get('bidang', [BidangController::class,'index','store','update']);
         Route::get('tambah-bidang', [BidangController::class,'create']);
         Route::post('bidang-add', [BidangController::class,'store']);
+
         Route::get('edit-bidang/{id}', [BidangController::class,'edit']);
-        Route::put('bidang-edit/{id}', [BidangController::class,'update']);
+        Route::put('/bidang/update/{id}', [BidangController::class,'update']);
+        
         Route::get('hapus-bidang/{id}', [BidangController::class,'destroy']);
 
         Route::resource("laporan-admin", LaporanController::class);
     });
 
     Route::group(["middleware" => ["ceklevel:pegawai"]], function () {
-        Route::resource("kinerja", KinerjaController::class);
+        Route::get("kinerja-pegawai", [KinerjaController::class, 'index','store']);
+        Route::get("tambah-kinerja", [KinerjaController::class, 'create']);
+        Route::post("/kinerja-add", [KinerjaController::class, 'store']);
         Route::resource("laporan-pegawai", LaporanController::class);
     });
 
