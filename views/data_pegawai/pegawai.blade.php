@@ -28,7 +28,7 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-sm-12 col-md-9"></div>
-                                    <div class="col-sm-12 col-md-3">
+                                    {{-- <div class="col-sm-12 col-md-3">
                                         <form action="" method="get">
                                             <div class="col-sm-3">
                                               <div class="input-group mb-3" style="width: 240px;">
@@ -37,12 +37,12 @@
                                               </div>
                                             </div>
                                           </form>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="example2" class="table table-bordered table-hover dataTable dtr-inline collapsed" >
+                                    <table id="pegawai" class="table table-bordered table-hover dataTable dtr-inline collapsed" >
                                 <thead>
                                     <tr role="row">
                                         <th>No</th>
@@ -93,5 +93,10 @@
             </div>
         </div>
     </section>
+    @push('main-script')
+  <script>
+    $('#pegawai').dataTable();
+  </script>
+@endpush
     
 @endsection

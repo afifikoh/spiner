@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{{ url('http://127.0.0.1:8000/img/logo1.ico') }}">
   <title>Halaman Login</title>
 
   <!-- Google Font: Source Sans Pro -->
