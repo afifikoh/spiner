@@ -32,44 +32,35 @@
 <div class="container-fluid">
    
         <!-- /.card-header -->
+    <div class="col-sm-12">
+      <div class="card">
         <div class="card-body">
           <div class="row">
             <div class="col-sm-12">
-              <table id="kinerja" class="table table-sm table-bordered table-hover dataTable dtr-inline " aria-describedby="example2_info">
+              <table id="tb_kinerja" class="table table-bordered table-hover ">
             <thead>
+              <tr>
                 <th style="text-align:center">No</th>
                 <th style="text-align:center">Hari</th>
                 <th style="text-align:center">Tgl</th>
                 <th style="text-align:center">Hasil</th>
                 <th style="text-align:center">Bukti</th>
+              </tr>
             </thead>
-            <tbody>
-            <tr class="odd">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr class="even">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            </tbody>
+            {{-- <tbody> --}}
           </table>
         </div>
     </div>
         </div>
+      </div>
+    </div>
         <!-- /.card-body -->
       </div>
-</div>
-</div>
 
       <!-- CONTENT -->
       @endsection
+      @push('main-script')
       <script>
-        $('#kinerja').dataTable();
-        </script>
+        $('#tb_kinerja').dataTable();
+      </script>
+    @endpush
