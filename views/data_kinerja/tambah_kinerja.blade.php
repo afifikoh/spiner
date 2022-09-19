@@ -34,19 +34,43 @@
                   </div>
                   <div class="form-group col-md-5">
                     <label for="hasil">Hasil Kinerja</label><span class="text-danger">*</span>
-                    <textarea class="form-control" id="hasil" name="hasil" rows="4" placeholder="Masukkan Hasil Kinerja"></textarea>
+                    <textarea class="form-control 
+                    @error('hasil')
+                    is-invalid
+                    @enderror" id="hasil" name="hasil" rows="4" placeholder="Masukkan Hasil Kinerja"></textarea>
+                    @error('hasil')
+                          <div class='invalid-feedback'>
+                             {{ $message }}
+                          </div>
+                      @enderror
                   </div>
                   <div class="form-group col-md-5">
                   {{-- <img src="{{ template(img) }}" height="128"> --}}
                     <label for="foto">Bukti Foto</label><span class="text-danger">*</span>
                     <div class="input-group">
-                      <input type="file" class="form-control" id="foto" name="foto">
+                      <input type="file" class="form-control 
+                      @error('foto')
+                      is-invalid
+                      @enderror" id="foto" name="foto">
+                      @error('foto')
+                          <div class='invalid-feedback'>
+                             {{ $message }}
+                          </div>
+                      @enderror
                     </div>
                   </div>
                   <div class="form-group col-md-5">
                     <label for="doc">Bukti Document (.pdf)</label><span class="text-danger">*</span>
                     <div class="input-group">
-                      <input type="file" class="form-control" id="doc" name="doc">
+                      <input type="file" class="form-control '
+                      @error('doc')
+                      is-invalid
+                      @enderror" id="doc" name="doc">
+                      @error('doc')
+                          <div class='invalid-feedback'>
+                             {{ $message }}
+                          </div>
+                      @enderror
                     </div>
                   </div>
                 </div>
@@ -61,9 +85,6 @@
             </div>
             </div>
           </div>
-    </div>
-  </div>
-</div>
 <!-- /.card -->
 <!-- /.content-wrapper -->
 @endsection
