@@ -40,6 +40,22 @@ class KinerjaController extends Controller
             "user" => $user,
         ]);
     }
+    
+    public function editprofil()
+    {
+        $user = Auth::User();
+        return view('data_kinerja.edit_profil')->with([
+            "user" => $user,
+        ]);
+    }
+
+    public function editpassword()
+    {
+        $user = Auth::User();
+        return view('data_kinerja.edit_password')->with([
+            "user" => $user,
+        ]);
+    }
 
     public function laporan()
     {
