@@ -33,6 +33,22 @@ class KinerjaController extends Controller
         ]);
     }
 
+    public function pengaturan()
+    {
+        $user = Auth::User();
+        return view('pengaturan.pengaturan_pegawai')->with([
+            "user" => $user,
+        ]);
+    }
+
+    public function laporan()
+    {
+        $user = Auth::User();
+        return view('laporan_kinerja.lapkinerja_pgw')->with([
+            "user" => $user,
+        ]);
+    }
+
     public function store(Request $request)
     {
         $foto = $request->file('foto');
@@ -58,7 +74,15 @@ class KinerjaController extends Controller
         return redirect('kinerja-pegawai');
     }
 
-
-    
-    
+    public function destroy($id, Request $request)
+    {
+        $kinerja = Kinerja::find($id);
+        $kinerja->delete();
+        $foto = 'template/dist/img/kinerja/'.$kinerja->foto;
+        $doc  = 'template/dist/img/kinerja/'.$kinerja->doc;
+        @unlink($foto);
+        @unlink($doc);
+        //File::delete($path);
+        return redirect('/data_kinerja/kinerja-pegawai')->with('status','Data berhasil di hapus!');
+    }   
 }
