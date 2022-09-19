@@ -40,7 +40,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="nik">NIK</label>
-                                            <input type="text" name='nik' class="form-control
+                                            <input type="text" name='nik'autocomplete="off" class="form-control
                                             @error('nik')
                                                 is-invalid
                                             @enderror
@@ -82,7 +82,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="nama">Nama</label>
-                                            <input type="text" name="nama" class="form-control
+                                            <input type="text" name="nama" autocomplete="off" class="form-control
                                             @error('nama')
                                             is-invalid
                                             @enderror
@@ -97,7 +97,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="jabatan">Jabatan</label>
-                                            <input type="text" name="jabatan" class="form-control
+                                            <input type="text" name="jabatan" autocomplete="off" class="form-control
                                             @error('jabatan')
                                             is-invalid
                                             @enderror
@@ -146,19 +146,15 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label for="thn_masuk">Tahun Masuk</label>
-                                            <input type="text" name="thn_masuk" class="form-control
-                                            @error('thn_masuk')
-                                            is-invalid
-                                            @enderror
-                                            " placeholder="Masukan Tahun Masuk" value="{{ old('thn_masuk') }}">
-                                            @error('thn_masuk')
-                                                <div class='invalid-feedback'>
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
+                                        <div>
+                                            <label for="tahun-masuk">Tahun Masuk</label>
+                                              <select name="tahun" class="form-control">
+                                                <option selected="selected">~ Pilih Tahun Masuk ~</option>
+                                                <?php for ($i = date("Y"); $i >= date("Y") - 32; $i -= 1) {
+                                                    echo "<option value='$i'> $i </option>";
+                                                } ?>
+                                                </select>
+                                          </div>
                                     </div>
                                     <div class="col-sm-3">
                                         {{-- <div class="form-group">
@@ -166,40 +162,42 @@
                                             <input type="text" name="bln_masuk" class="form-control" placeholder="Masukan Bulan Masuk" required>
                                             
                                         </div> --}}
-                                        <div class="form-group">
-                                            <label for="bln_masuk">Bulan Masuk</label>
-                                            <select name="bln_masuk" class="custom-select 
-                                            @error('bln_masuk')
-                                            is-invalid
-                                            @enderror
-                                            " id="bln_masuk" placeholder="- Pilih Bulan Masuk -" value="{{ old('bln_masuk') }}" >
-                                                <option>- Pilih Bulan Masuk -</option>
-                                                <option value="01">Januari</option>
-                                                <option value="02">Februari</option>
-                                                <option value="03">Maret</option>
-                                                <option value="04">April</option>
-                                                <option value="05">Mei</option>
-                                                <option value="06">Juni</option>
-                                                <option value="07">Juli</option>
-                                                <option value="08">Agustus</option>
-                                                <option value="09">September</option>
-                                                <option value="10">Oktober</option>
-                                                <option value="11">November</option>
-                                                <option value="12">Desember</option>
-                                            </select>
-                                            @error('bln_masuk')
-                                                <div class='invalid-feedback'>
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
+                                        <div>
+                                            <label for="bulan-masuk">Bulan Masuk</label>
+                                            <select name="bulan" class="form-control">
+                                              <option selected="selected">~ Pilih Bulan Masuk ~</option>
+                                              <?php
+                                              $bln = [
+                                                  1 => "Januari",
+                                                  "Februari",
+                                                  "Maret",
+                                                  "April",
+                                                  "Mei",
+                                                  "Juni",
+                                                  "Juli",
+                                                  "Agustus",
+                                                  "September",
+                                                  "Oktober",
+                                                  "November",
+                                                  "Desember",
+                                              ];
+                                              for ($bulan = 1; $bulan <= 12; $bulan++) {
+                                                  if ($bulan <= 9) {
+                                                      echo "<option value='0$bulan'>$bln[$bulan]</option>";
+                                                  } else {
+                                                      echo "<option value='$bulan'>$bln[$bulan]</option>";
+                                                  }
+                                              }
+                                              ?>
+                                              </select>
+                                          </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="no_hp">No HP</label>
-                                            <input type="text" name="no_hp" class="form-control
+                                            <input type="text" name="no_hp" autocomplete="off" class="form-control
                                             @error('no_hp')
                                             is-invalid
                                             @enderror
@@ -214,7 +212,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="pend_terakhir">Pendidikan Terakhir</label>
-                                            <input type="text" name="pend_terakhir" class="form-control
+                                            <input type="text" name="pend_terakhir" autocomplete="off" class="form-control
                                             @error('pend_terakhir')
                                             is-invalid
                                             @enderror
@@ -229,7 +227,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="text" name="email" class="form-control
+                                            <input type="text" name="email" autocomplete="off" class="form-control
                                             @error('email')
                                             is-invalid
                                             @enderror
@@ -261,7 +259,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="alamat">Alamat</label>
-                                            <textarea name="alamat" class="form-control
+                                            <textarea name="alamat" autocomplete="off" class="form-control
                                             @error('email')
                                             is-invalid
                                             @enderror
@@ -283,7 +281,7 @@
                                             @enderror
                                             " id="level" placeholder="- Pilih Level -" value="{{ old('level') }}" >
                                                 <option>- pilih Level -</option>
-                                                <option value="kepala-bidang">Kepala Bidang</option>
+                                                <option value="kepala-bidang">kepala Bidang</option>
                                                 <option value="sub-koordiator">Sub Koordinator</option>
                                                 <option value="pegawai">Pegawai</option>
                                             </select>
