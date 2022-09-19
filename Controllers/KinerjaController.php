@@ -40,7 +40,7 @@ class KinerjaController extends Controller
             "user" => $user,
         ]);
     }
-    
+
     public function editprofil()
     {
         $user = Auth::User();
@@ -67,6 +67,17 @@ class KinerjaController extends Controller
 
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'hasil'    => 'required',
+            'foto'       => 'required|mimes:jpeg,png,jpg',
+            'doc'       => 'required|mimes:pdf'
+        ],
+        [
+            'hasil.required' => 'Hasil tidak boleh kosong!',
+            'foto.required' => 'Foto tidak boleh kosong!',
+            'doc.required' => 'Doc harus diisi berupa .pdf!',
+        ]);  
+
         $foto = $request->file('foto');
         $newFoto = 'foto_kinerja' . '_' . time() . '.' . $foto->extension();
 
@@ -100,5 +111,5 @@ class KinerjaController extends Controller
         @unlink($doc);
         //File::delete($path);
         return redirect('/data_kinerja/kinerja-pegawai')->with('status','Data berhasil di hapus!');
-    }   
+    }
 }
