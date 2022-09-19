@@ -63,6 +63,8 @@ Route::group(["middleware" => ["auth"]], function () {
     Route::group(["middleware" => ["ceklevel:pegawai"]], function () {
         Route::get("kinerja-pegawai", [KinerjaController::class, 'index','store']);
         Route::get("pengaturan-pegawai", [KinerjaController::class, 'pengaturan']);
+        Route::get("edit-profil-pegawai", [KinerjaController::class, 'editprofil']);
+        Route::get("edit-password-pegawai", [KinerjaController::class, 'editpassword']);
         Route::get("laporan-pegawai", [KinerjaController::class, 'laporan']);
         Route::get("tambah-kinerja", [KinerjaController::class, 'create']);
         Route::post("/kinerja-add", [KinerjaController::class, 'store']);
