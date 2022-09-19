@@ -1,4 +1,4 @@
-@extends('p_layouts.main')
+@extends('layout.main')
 
 @section('judul')
 <div class="content-header">
@@ -48,8 +48,6 @@
     </div>
     </div>
   </div>
-</div>
-</div>
 
 
 <!-- ISI CONTENT -->
