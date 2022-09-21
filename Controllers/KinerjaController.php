@@ -6,6 +6,7 @@ use App\Models\Kinerja;
 use App\Models\Bidang;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Alert;
 
 class KinerjaController extends Controller
 {
@@ -98,6 +99,7 @@ class KinerjaController extends Controller
             'hasil' => $request->hasil,
         ]);
         // $message="Berhasil Simpan Data";
+        Alert::success('Berhasil', 'Data berhasil disimpan');
         return redirect('kinerja-pegawai');
     }
 
@@ -110,6 +112,7 @@ class KinerjaController extends Controller
         @unlink($foto);
         @unlink($doc);
         //File::delete($path);
-        return redirect('/data_kinerja/kinerja-pegawai')->with('status','Data berhasil di hapus!');
+        Alert::success('Berhasil', 'Data berhasil dihapus');
+        return redirect('kinerja-pegawai');
     }
 }
