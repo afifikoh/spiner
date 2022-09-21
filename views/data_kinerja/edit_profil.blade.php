@@ -41,7 +41,7 @@
                </div>
                <div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="{{url('/pegawai/pengaturan')}}" class="btn btn-warning">Batal</a>
+                <a href="{{url('pengaturan-pegawai')}}" class="btn btn-warning">Batal</a>
                </div>
             </div>
            </div>
