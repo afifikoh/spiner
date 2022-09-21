@@ -55,7 +55,7 @@
             <div class="icon">
                 <i class="ion fa fa-file-alt"></i>
             </div>
-            <a href="{{ url('laporan-admin') }}" class="small-box-footer"
+            <a href="{{ url('laporan-pegawai-admin') }}" class="small-box-footer"
                 ><strong>Selengkapnya </strong> <i class="fas fa-arrow-circle-right"></i
             ></a>
         </div>
