@@ -220,4 +220,12 @@ class PegawaiController extends Controller
         $users = User::where('id',$id)->delete();
         return redirect('pegawai')->with(['success'=>'Data Berhasil Dihapus!']);
     }
+    
+    public function laporan()
+    {
+        $user = Auth::User();
+        return view('laporan_kinerja.lapkinerja_adm')->with([
+            "user" => $user,
+        ]);
+    }
 }
