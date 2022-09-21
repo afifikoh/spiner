@@ -31,7 +31,7 @@
     <div class="card-body">
       <div class="row">
         <div class="col-sm-12">
-          <table id="kinerja" class="table table-bordered table-hover ">
+          <table id="dt-table" class="table table-bordered table-hover ">
             <thead>
             <tr>
               <th style="text-align:center">No</th>
@@ -54,7 +54,7 @@
                 <td>
                 <div class="d-grid gap-2 d-md-block" style="text-align:center">
                   <a href="/edit-kinerja-pegawai/{{ $k->id }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                  <a href="/pegawai/hapus/{{ $k->id }}" class="btn btn-danger"><i class="fas fa-trash" onclick="return confirm('Yakin hapus data?')"></i></a>
+                  <a href="/pegawai-hapus/{{ $k->id }}" class="btn btn-danger"><i class="fas fa-trash" onclick="return confirm('Yakin hapus data?')"></i></a>
                 </div>
               </td>
             </tr>
@@ -70,8 +70,3 @@
 </div>
   <!-- CONTENT -->
   @endsection
-@push('main-script')
-<script>
-$('#kinerja').dataTable();
-</script>
-@endpush
