@@ -42,6 +42,7 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::get("pegawai", [PegawaiController::class, 'index','store']);
         Route::get('tambah-pegawai', [PegawaiController::class,'create']);
         Route::post('pegawai-add', [PegawaiController::class,'store']);
+        Route::get("laporan-pegawai-admin", [PegawaiController::class, 'laporan']);
 
         Route::get('edit-pegawai/{id}', [PegawaiController::class,'edit']);
         Route::post('/pegawai/update/{id}', [PegawaiController::class,'update']);
@@ -57,7 +58,6 @@ Route::group(["middleware" => ["auth"]], function () {
         
         Route::get('hapus-bidang/{id}', [BidangController::class,'destroy']);
 
-        Route::resource("laporan-admin", LaporanController::class);
     });
 
     Route::group(["middleware" => ["ceklevel:pegawai"]], function () {
