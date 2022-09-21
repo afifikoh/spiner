@@ -32,14 +32,12 @@
                       <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Ulangi Password baru ..">
                   </div><br>
                   <button type="button" class="btn btn-primary">Perbarui</button>
-                  <a href="{{url('/pegawai/pengaturan')}}" class="btn btn-warning">Batal</a>
+                  <a href="{{url('pengaturan-pegawai')}}" class="btn btn-warning">Batal</a>
               </div>
           </form>
       </div>
   </div>
   </div>
   </div>
-  </div>
   
   @endsection
-  
