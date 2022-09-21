@@ -52,7 +52,7 @@
 
 <li class="nav-header">LAPORAN</li>
 <li class="nav-item">
-    <a href="{{ url('laporan-pegawai') }}" class="nav-link {{ Request::is('laporan-pegawai') ? 'active':'' }}">
+    <a href="{{ url('laporan-pegawai-admin') }}" class="nav-link {{ Request::is('laporan-pegawai') ? 'active':'' }}">
         <i class="nav-icon fas fa-chart-line"></i>
         <p>Sudah Terverifikasi</p>
     </a>
