@@ -52,7 +52,7 @@ class BidangController extends Controller
         return redirect('bidang')->with(['success'=>'Data Berhasil Ditambah!']);
     }
 
-    public function edit($id)
+   public function edit($id)
     {
         $user = Auth::User();
         $bidang = Bidang::find($id);
