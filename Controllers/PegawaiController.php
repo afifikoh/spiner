@@ -123,12 +123,12 @@ class PegawaiController extends Controller
         return redirect('pegawai');
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $user = Auth::User();
-        $users = User::with('Bidang')->find($id);
-        $bidang = Bidang::select('id','bidang')->get();
-        return view('data_pegawai.edit_pgw', compact('users','bidang'))->with([
+        $users = User::find($id);
+        // $bidang = Bidang::get(['id','bidang']);
+        return view('data_pegawai.edit_pgw', compact('users'))->with([
             "user" => $user,
         ]);
 
