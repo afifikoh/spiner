@@ -52,23 +52,27 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
+                                    {{-- <div class="col-sm-2">
+                                        {{-- <div class="form-group">
                                             <label for="kode_dinas">Kode Dinas</label>
                                             <input type="text" name='kode_dinas' class="form-control" id="kode_dinas" value="{{ $users->kode_dinas }} readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
+                                        </div> --}}
+                                    {{-- </div>  --}}
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="bidang">Bidang</label>
                                             <select name="bidang" class="custom-select
                                             @error('bidang')
                                             is-invalid
-                                            @enderror " id="bidang" placeholder="- Pilih Bidang -" value="{{ $users->bidang }}">
-                                                <option value="{{ $users->bidang->id }}">{{ $users->bidang->bidang }}</option>
-                                                @foreach ($bidang as $data)
+                                            @enderror " id="bidang" placeholder="- Pilih Bidang -" >
+                                                <option value="{{ $users->bidang }}">{{ $users->bidang }}</option>
+                                                {{-- @foreach ($bidang as $data)
+                                                    <option value="{{ $data->id }}">{{ $data->bidang }}</option>
+                                                @endforeach --}}
+                                                {{-- {{ $users->bidang->id }}">{{ $users->bidang->bidang }}</option> --}}
+                                                {{-- @foreach ($bidang as $data)
                                                     <option value="{{ $data->id }}"> {{ $data->bidang }} </option>
-                                                @endforeach
+                                                @endforeach --}}
                                             </select>
                                             @error('bidang')
                                                 <div class='invalid-feedback'>
@@ -101,7 +105,7 @@
                                             @error('jabatan')
                                             is-invalid
                                             @enderror
-                                            " id="jabatan" value="{{ $users->jabatan }}">
+                                            " id="jabatan" value="{{ $users->jabatan }}" >
                                             @error('jabatan')
                                                 <div class='invalid-feedback'>
                                                     {{ $message }}
@@ -133,10 +137,13 @@
                                             @error('jk')
                                             is-invalid
                                             @enderror
-                                            " id="jk" placeholder="- Pilih Jenis Kelamin -" value="{{ $users->jk }}">
-                                                <option value="">- pilih Jenis Kelamin -</option>
-                                                <option value="Laki-laki">Laki-laki</option>
-                                                <option value="Perempuan">Perempuan</option>
+                                            " id="jk" placeholder="- Pilih Jenis Kelamin -">
+                                                <option  value="{{ $users->jk }}">{{ $users->jk }}</option>
+                                                @if ($users->jk == "Laki-laki")
+                                                    <option value="Perempuan">Perempuan</option>
+                                                @else
+                                                    <option value="Laki-laki">Laki-laki</option>
+                                                @endif
                                             </select>
                                             @error('jk')
                                                 <div class='invalid-feedback'>
@@ -244,7 +251,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="password">Password</label>
-                                            <input type="text" name="password" class="form-control
+                                            <input type="password" name="password" class="form-control
                                             @error('email')
                                             is-invalid
                                             @enderror
@@ -265,7 +272,7 @@
                                             @error('email')
                                             is-invalid
                                             @enderror
-                                            " rows="3" placeholder="Masukan Alamat" value="{{ $users->alamat }}">
+                                            " rows="3" placeholder="Masukan Alamat">{{ $users->alamat }}
                                             </textarea>
                                             @error('alamat')
                                             <div class='invalid-feedback'>
@@ -274,7 +281,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    {{-- <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="level">Level</label>
                                             <select name="level" class="custom-select 
@@ -293,8 +300,8 @@
                                                 </div>
                                             @enderror
                                         </div>
-                                    </div>
-                                    <div class="col-sm-3">
+                                    </div> --}}
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <div class="custome file @error('foto')
                                             is-invalid
@@ -302,7 +309,7 @@
                                                 <label for="foto">Foto</label>
                                                 <label> </label>
                                                 
-                                                <input type="file" class="form-control " name="foto">
+                                                <input type="file" class="form-control " name="foto" value="{{ $users->foto }}">
                                                 
                                             </div>
                                             @error('level')
