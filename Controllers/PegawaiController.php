@@ -266,6 +266,50 @@ class PegawaiController extends Controller
 
         return redirect('/pegawai');
     }
+    
+    public function editprofil(Request $request, $id)
+    {
+        $user = Auth::User();
+        $users = User::find($id);
+        return view('data_kinerja.edit_profil',compact('users'))->with([
+            "user" => $user,
+        ]);  
+    }
+
+    
+    public function updateprofil(Request $request, $id)
+    {
+$request->validate([
+        'foto' => 'required|image',
+        'nama' => 'required',
+        'alamat' => 'required',
+        'email' => 'required',
+        'no_hp' => 'required'
+    ],
+    [
+        'foto.required' => 'Pilih Foto!',
+        'nama.required' => 'Nama tidak boleh kosong',
+        'alamat.required' => 'Alamat tidak boleh kosong!',
+        'email.required' => 'Email tidak boleh kosong!',
+        'no_hp.required' => 'No HP tidak boleh kosong!'
+    ]);
+
+        $foto = $request->file('foto');
+        $newFoto = 'foto_pegawai' . '_' . time() . '.' . $foto->extension();
+        
+        $path = 'img-user/';
+        $request->foto->move(public_path($path), $newFoto);
+        $users = User::find($id);
+            $users->foto      = $newFoto;
+            $users->nama      = $request->nama;
+            $users->alamat    = $request->alamat;
+            $users->email     = $request->email;
+            $users->no_hp    = $request->no_hp;
+        $users->update();
+
+        Alert::success('Berhasil', 'Data berhasil diubah');
+        return redirect('pengaturan-pegawai');
+    }
  
     public function editpassword($id)
     {
