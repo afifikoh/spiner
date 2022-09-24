@@ -266,7 +266,43 @@ class PegawaiController extends Controller
 
         return redirect('/pegawai');
     }
+ 
+    public function editpassword($id)
+    {
+        $user = Auth::User();
+        $users = User::find($id);
+        return view('data_kinerja.edit_password', compact('users'))->with([
+            "user" => $user,
+        ]);  
+    }
 
+    public function updatepassword(Request $request, $id)
+    {
+    // $user = Auth::User();
+    $users = User::find($id);
+    $request->validate([
+        'password_lama' => 'required|same:password',
+        'password_baru' => 'required',
+        'password_konfirmasi' => 'same:password_baru'
+    ],
+    [
+        'password_lama.same' => 'Password tidak sesuai!',
+        'password_lama.required' => 'Password tidak boleh kosong',
+        'password_baru.required' => 'Password baru tidak boleh kosong!',
+        'password_konfirmasi.same' => 'Password baru dan konfirmasi password harus sama!',
+    ]);
+
+    if(!Hash::check($request->password_lama, auth()->user()->password)){
+        return back()->with("error", "Password tidak sesuai!");
+    }
+
+    User::whereId(auth()->user()->id)->update([
+        'password' => Hash::make($request->password_baru)
+    ]);
+
+    Alert::success('Berhasil', 'Password berhasil diubah');
+    return redirect('pengaturan-pegawai');
+    }
 
     public function destroy(Request $request, $id)
     {
