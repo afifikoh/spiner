@@ -17,32 +17,80 @@
  <div class="container-fluid">
      <div class="col-sm-12">
        <div class="card">
-         <form>
+         {{-- <form> --}}
           <div class="col-lg-5">
             <div class="card-body">
-               <div class="form-group">
-                  <input type="file" class="form-control-file" id="exampleFormControlFile1">
-               </div>
-               <div class="form-group">
-                   <label for="exampleFormControlInput1">Nama</label>
-                   <input type="nama" class="form-control" id="exampleFormControlInput1" placeholder="">
-                </div>
-               <div class="form-group">
-                     <label for="exampleFormControlInput1">Email</label>
-                     <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
-               </div>
-               <div class="form-group">
-                     <label for="exampleFormControlInput1">Alamat</label>
-                     <input type="alamat" class="form-control" id="exampleFormControlInput1" placeholder="">
-               </div>
-               <div class="form-group">
-                     <label for="exampleFormControlInput1">No Telp</label>
-                     <input type="no_hp" class="form-control" id="exampleFormControlInput1" placeholder="">
-               </div>
-               <div>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="{{url('pengaturan-pegawai')}}" class="btn btn-warning">Batal</a>
-               </div>
+              <form action="/update/profil/pegawai/{{ $user->id }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                  <div class="form-group">
+                      <input type="file" class="form-control-file 
+                      @error('foto')
+                      is-invalid
+                      @enderror" 
+                      id="foto" name="foto">
+                      @error('foto')
+                          <div class='invalid-feedback'>
+                              {{ $message }}
+                          </div>
+                      @enderror
+                  </div>
+                  <div class="form-group">
+                      <label for="nama">Nama</label>
+                      <input type="text" class="form-control
+                      @error('nama')
+                      is-invalid
+                      @enderror"
+                      name="nama" id="nama" value="{{ $user->nama }}">
+                      @error('nama')
+                          <div class='invalid-feedback'>
+                              {{ $message }}
+                          </div>
+                      @enderror
+                    </div>
+                  <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control
+                        @error('email')
+                        is-invalid
+                        @enderror" 
+                        name="email" id="email" value="{{ $user->email }}">
+                        @error('email')
+                          <div class='invalid-feedback'>
+                              {{ $message }}
+                          </div>
+                        @enderror
+                  </div>
+                  <div class="form-group">
+                        <label for="alamat">Alamat</label>
+                        <input type="text" class="form-control
+                        @error('alamat')
+                        is-invalid
+                        @enderror" 
+                        name="alamat" id="alamat" value="{{ $user->alamat }}">
+                        @error('alamat')
+                          <div class='invalid-feedback'>
+                              {{ $message }}
+                          </div>
+                        @enderror
+                  </div>
+                  <div class="form-group">
+                        <label for="no_hp">No Telp</label>
+                        <input type="text" class="form-control
+                        @error('no_hp')
+                        is-invalid
+                        @enderror" 
+                        name="no_hp" id="no_hp" value="{{ $user->no_hp }}">
+                        @error('no_hp')
+                          <div class='invalid-feedback'>
+                              {{ $message }}
+                          </div>
+                        @enderror
+                  </div>
+                  <div>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <a href="{{url('pengaturan-pegawai')}}" class="btn btn-warning">Batal</a>
+                  </div>
+              </form>
             </div>
            </div>
          </form>
