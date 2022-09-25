@@ -25,7 +25,7 @@
                         <span class="box-icon"><br><i class="fa-5x fas fa-user-edit"></i></span>
                         <span class="info-box-number">Profil Saya</span>
                         <span class="info-box-text">Ubah data diri kamu</span><br>
-                        <a href="{{url ('/pegawai/edit-profil')}}" class="nav-link" style="text-align: center"> 
+                        <a href="{{url ('/edit-profil-pegawai/{id}')}}" class="nav-link" style="text-align: center"> 
                           <button type="button" class="btn btn-warning rounded-pill">Ubah sekarang</button>
                         </a>
                     </div>
@@ -38,7 +38,7 @@
                         <span class="box-icon"><br><i class="fa-5x fas fa-lock"></i></span>
                         <span class="info-box-number">Password Saya</span>
                         <span class="info-box-text">Ganti kata sandimu</span><br>
-                        <a href="{{url ('/pegawai/edit-password/{id}')}}" class="nav-link" style="text-align: center"> 
+                        <a href="{{url ('/edit-password-pegawai/{id}')}}" class="nav-link" style="text-align: center"> 
                           <button type="button" class="btn btn-warning rounded-pill">Ubah sekarang</button>
                         </a>
                     </div>
