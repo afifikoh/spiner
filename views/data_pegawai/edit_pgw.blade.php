@@ -29,7 +29,7 @@
                                             @error('nip')
                                                 is-invalid
                                             @enderror
-                                            " id="nip" value="{{ $users->nip }}" >
+                                            " id="nip" value="{{ $users->nip }}" readonly>
                                             @error('nip')
                                                 <div class='invalid-feedback'>
                                                     {{ $message }}
@@ -52,27 +52,23 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    {{-- <div class="col-sm-2">
-                                        {{-- <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
                                             <label for="kode_dinas">Kode Dinas</label>
-                                            <input type="text" name='kode_dinas' class="form-control" id="kode_dinas" value="{{ $users->kode_dinas }} readonly>
-                                        </div> --}}
-                                    {{-- </div>  --}}
-                                    <div class="col-sm-6">
+                                            <input type="text" name='kode_dinas' class="form-control" id="kode_dinas" value="{{ $users->kode_dinas }}" readonly>
+                                        </div>
+                                    </div> 
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="bidang">Bidang</label>
                                             <select name="bidang" class="custom-select
                                             @error('bidang')
                                             is-invalid
                                             @enderror " id="bidang" placeholder="- Pilih Bidang -" >
-                                                <option value="{{ $users->bidang }}">{{ $users->bidang }}</option>
-                                                {{-- @foreach ($bidang as $data)
+                                                <option value="{{ $users->nmbidang->id }}">{{ $users->nmbidang->bidang }}</option>
+                                                @foreach ($bidang as $data)
                                                     <option value="{{ $data->id }}">{{ $data->bidang }}</option>
-                                                @endforeach --}}
-                                                {{-- {{ $users->bidang->id }}">{{ $users->bidang->bidang }}</option> --}}
-                                                {{-- @foreach ($bidang as $data)
-                                                    <option value="{{ $data->id }}"> {{ $data->bidang }} </option>
-                                                @endforeach --}}
+                                                @endforeach
                                             </select>
                                             @error('bidang')
                                                 <div class='invalid-feedback'>
@@ -118,17 +114,23 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="tgl_lahir">Tanggal Lahir</label>
-                                            <input type="date" name="tgl_lahir" id="date" class="form-control
+                                            <input type="text" name="tgl_lahir" id="tgl_lahir" autocomplete="off" class="date form-control
                                             @error('tgl_lahir')
                                             is-invalid
                                             @enderror
-                                            " placeholder="" value="{{ $users->tgl_lahir }}">
+                                            " placeholder="Masukan Tanggal Lahir" value="{{ old('tgl_lahir') }}">
+                                            
                                             @error('tgl_lahir')
                                                 <div class='invalid-feedback'>
                                                     {{ $message }}
                                                 </div>
                                             @enderror
                                         </div>
+                                        <script type="text/javascript">
+                                            $('.date').datepicker({  
+                                               format: 'yyyy mm dd'
+                                             });  
+                                        </script> 
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
@@ -143,6 +145,7 @@
                                                     <option value="Perempuan">Perempuan</option>
                                                 @else
                                                     <option value="Laki-laki">Laki-laki</option>
+                                                    
                                                 @endif
                                             </select>
                                             @error('jk')
@@ -155,11 +158,14 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="thn_masuk">Tahun Masuk</label>
-                                            <input type="text" name="thn_masuk" class="form-control
-                                            @error('thn_masuk')
-                                            is-invalid
-                                            @enderror
-                                            " placeholder="Masukan Tahun Masuk" value="{{ $users->thn_masuk }}">
+                                              <select name="thn_masuk" class="form-control @error('thn_masuk')
+                                              is-invalid
+                                              @enderror">
+                                                <option value="{{ $users->thn_masuk }}" selected="selected">{{ $users->thn_masuk }}</option>
+                                                <?php for ($i = date("Y"); $i >= date("Y") - 32; $i -= 1) {
+                                                    echo "<option value='$i'> $i </option>";
+                                                } ?>
+                                                </select>
                                             @error('thn_masuk')
                                                 <div class='invalid-feedback'>
                                                     {{ $message }}
@@ -168,32 +174,56 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
-                                        {{-- <div class="form-group">
-                                            <label for="bln_masuk">Bulan Masuk</label>
-                                            <input type="text" name="bln_masuk" class="form-control" placeholder="Masukan Bulan Masuk" required>
-                                            
-                                        </div> --}}
+                                        
                                         <div class="form-group">
                                             <label for="bln_masuk">Bulan Masuk</label>
-                                            <select name="bln_masuk" class="custom-select 
+                                            {{-- <select name="bln_masuk" class="custom-select 
                                             @error('bln_masuk')
                                             is-invalid
                                             @enderror
                                             " id="bln_masuk" placeholder="- Pilih Bulan Masuk -" value="{{ $users->bln_masuk }}" >
-                                                <option>- Pilih Bulan Masuk -</option>
-                                                <option value="01">Januari</option>
-                                                <option value="02">Februari</option>
-                                                <option value="03">Maret</option>
-                                                <option value="04">April</option>
-                                                <option value="05">Mei</option>
-                                                <option value="06">Juni</option>
-                                                <option value="07">Juli</option>
-                                                <option value="08">Agustus</option>
-                                                <option value="09">September</option>
-                                                <option value="10">Oktober</option>
-                                                <option value="11">November</option>
-                                                <option value="12">Desember</option>
-                                            </select>
+                                                <option value="{{ $users->bln_masuk }}">{{ $users->bln_masuk }}</option>              
+                                                <option value="01">01</option>
+                                                <option value="02">02</option>
+                                                <option value="03">03</option>
+                                                <option value="04">04</option>
+                                                <option value="05">05</option>
+                                                <option value="06">06</option>
+                                                <option value="07">07</option>
+                                                <option value="08">08</option>
+                                                <option value="09">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select> --}}
+                                            <select name="bln_masuk" class="form-control @error('bln_masuk')
+                                            is-invalid
+                                            @enderror">
+                                              <option value="{{ $users->bln_masuk }}" selected="selected">{{ $users->bln_masuk }}</option>
+                                              <?php
+                                              $bln = [
+                                                  1 => "Januari",
+                                                  "Februari",
+                                                  "Maret",
+                                                  "April",
+                                                  "Mei",
+                                                  "Juni",
+                                                  "Juli",
+                                                  "Agustus",
+                                                  "September",
+                                                  "Oktober",
+                                                  "November",
+                                                  "Desember",
+                                              ];
+                                              for ($bulan = 1; $bulan <= 12; $bulan++) {
+                                                  if ($bulan <= 9) {
+                                                      echo "<option value='0$bulan'>$bln[$bulan]</option>";
+                                                  } else {
+                                                      echo "<option value='$bulan'>$bln[$bulan]</option>";
+                                                  }
+                                              }
+                                              ?>
+                                              </select>
                                             @error('bln_masuk')
                                                 <div class='invalid-feedback'>
                                                     {{ $message }}
@@ -281,7 +311,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    {{-- <div class="col-sm-3">
+                                    <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="level">Level</label>
                                             <select name="level" class="custom-select 
@@ -289,10 +319,14 @@
                                             is-invalid
                                             @enderror
                                             " id="level" placeholder="- Pilih Level -" value="{{ $users->level }}" >
-                                                <option>- pilih Level -</option>
-                                                <option value="kepala-bidang">Kepala Bidang</option>
-                                                <option value="sub-koordiator">Sub Koordinator</option>
-                                                <option value="pegawai">Pegawai</option>
+                                            <option  value="{{ $users->level }}">{{ $users->level }}</option>
+                                                @if ($users->level == "kepala-bidang")
+                                                    <option value="pegawai">Pegawai</option>
+                                                @else
+                                                    <option value="kepala-bidang">Kepala Bidang</option>
+                                                
+                                                @endif
+                                                
                                             </select>
                                             @error('level')
                                                 <div class='invalid-feedback'>
@@ -300,15 +334,15 @@
                                                 </div>
                                             @enderror
                                         </div>
-                                    </div> --}}
-                                    <div class="col-sm-6">
+                                    </div>
+                                    <div class="col-sm-3">
                                         <div class="form-group">
                                             <div class="custome file @error('foto')
                                             is-invalid
                                             @enderror">
                                                 <label for="foto">Foto</label>
                                                 <label> </label>
-                                                
+                                                {{-- <img src="{{ asset ('img-user/'.$user->foto) }}" alt="user-image" class="img-circle elevation-2" width="15%"> --}}
                                                 <input type="file" class="form-control " name="foto" value="{{ $users->foto }}">
                                                 
                                             </div>
