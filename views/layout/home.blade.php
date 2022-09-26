@@ -68,7 +68,7 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-gradient-purple">
                 <div class="inner">
-                    <h1>4</h1>
+                    <h1>{{ \App\Models\Kinerja::count(); }}</h1>
                     <p>Kinerja Pegawai</p>
                 </div>
                 <div class="icon">
