@@ -68,7 +68,7 @@
                                         <td>{{ $data['email'] }}</td>
                                         <td>{{ $data['no_hp'] }}</td>
                                         <td>{{ $data['level']}}</td>
-                                        <td>{{ $data['bidang'] }}</td> 
+                                        <td>{{ $data->nmbidang['bidang'] }}</td> 
                                         <td>
                                         <div class="d-grid gap-2 d-md-block" style="text-align:center">
                                             <a href="edit-pegawai/{{ $data->id }}">
