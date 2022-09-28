@@ -161,10 +161,10 @@
                                               <select name="thn_masuk" class="form-control @error('thn_masuk')
                                               is-invalid
                                               @enderror">
-                                                <option value="{{ $users->thn_masuk }}" selected="selected">{{ $users->thn_masuk }}</option>
-                                                <?php for ($i = date("Y"); $i >= date("Y") - 32; $i -= 1) {
-                                                    echo "<option value='$i'> $i </option>";
-                                                } ?>
+                                                {{-- <option value="{{ $users->thn_masuk }}" selected="selected">{{ $users->thn_masuk }}</option> --}}
+                                                <?php for ($i = date("Y"); $i >= date("Y") - 32; $i -= 1) {?>
+                                                    <option value="{{ $i }}" {{ ($users->thn_masuk == $i)? 'selected': ''; }}>{{ $i }}</option>
+                                                <?php } ?>
                                                 </select>
                                             @error('thn_masuk')
                                                 <div class='invalid-feedback'>
@@ -177,53 +177,26 @@
                                         
                                         <div class="form-group">
                                             <label for="bln_masuk">Bulan Masuk</label>
-                                            {{-- <select name="bln_masuk" class="custom-select 
+                                            <select name="bln_masuk" class="custom-select 
                                             @error('bln_masuk')
                                             is-invalid
                                             @enderror
-                                            " id="bln_masuk" placeholder="- Pilih Bulan Masuk -" value="{{ $users->bln_masuk }}" >
-                                                <option value="{{ $users->bln_masuk }}">{{ $users->bln_masuk }}</option>              
-                                                <option value="01">01</option>
-                                                <option value="02">02</option>
-                                                <option value="03">03</option>
-                                                <option value="04">04</option>
-                                                <option value="05">05</option>
-                                                <option value="06">06</option>
-                                                <option value="07">07</option>
-                                                <option value="08">08</option>
-                                                <option value="09">09</option>
-                                                <option value="10">10</option>
-                                                <option value="11">11</option>
-                                                <option value="12">12</option>
-                                            </select> --}}
-                                            <select name="bln_masuk" class="form-control @error('bln_masuk')
-                                            is-invalid
-                                            @enderror">
-                                              <option value="{{ $users->bln_masuk }}" selected="selected">{{ $users->bln_masuk }}</option>
-                                              <?php
-                                              $bln = [
-                                                  1 => "Januari",
-                                                  "Februari",
-                                                  "Maret",
-                                                  "April",
-                                                  "Mei",
-                                                  "Juni",
-                                                  "Juli",
-                                                  "Agustus",
-                                                  "September",
-                                                  "Oktober",
-                                                  "November",
-                                                  "Desember",
-                                              ];
-                                              for ($bulan = 1; $bulan <= 12; $bulan++) {
-                                                  if ($bulan <= 9) {
-                                                      echo "<option value='0$bulan'>$bln[$bulan]</option>";
-                                                  } else {
-                                                      echo "<option value='$bulan'>$bln[$bulan]</option>";
-                                                  }
-                                              }
-                                              ?>
-                                              </select>
+                                            " id="bln_masuk" placeholder="- Pilih Bulan Masuk -" >
+                                                <option value=""></option>              
+                                                <option value="01" {{ ($users->bln_masuk == '01')? 'selected': ''; }}>Januari</option>
+                                                <option value="02" {{ ($users->bln_masuk == '02')? 'selected': ''; }}>Februari</option>
+                                                <option value="03" {{ ($users->bln_masuk == '03')? 'selected': ''; }}>Maret</option>
+                                                <option value="04" {{ ($users->bln_masuk == '04')? 'selected': ''; }}>04</option>
+                                                <option value="05" {{ ($users->bln_masuk == '05')? 'selected': ''; }}>05</option>
+                                                <option value="06" {{ ($users->bln_masuk == '06')? 'selected': ''; }}>06</option>
+                                                <option value="07" {{ ($users->bln_masuk == '07')? 'selected': ''; }}>07</option>
+                                                <option value="08" {{ ($users->bln_masuk == '08')? 'selected': ''; }}>08</option>
+                                                <option value="09" {{ ($users->bln_masuk == '09')? 'selected': ''; }}>09</option>
+                                                <option value="10" {{ ($users->bln_masuk == '10')? 'selected': ''; }}>10</option>
+                                                <option value="11" {{ ($users->bln_masuk == '11')? 'selected': ''; }}>11</option>
+                                                <option value="12" {{ ($users->bln_masuk == '12')? 'selected': ''; }}>12</option>
+                                            </select>
+                                            
                                             @error('bln_masuk')
                                                 <div class='invalid-feedback'>
                                                     {{ $message }}
@@ -263,7 +236,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="email">Email</label>
                                             <input type="text" name="email" class="form-control
@@ -280,8 +253,8 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label for="password">Password</label>
-                                            <input type="password" name="password" class="form-control
+                                            <label hidden for="password">Password</label>
+                                            <input hidden type="password" name="password" class="form-control
                                             @error('email')
                                             is-invalid
                                             @enderror
