@@ -7,6 +7,7 @@
     <div class="row mb-4">
         <h1 class="md-0">Data Kinerja Pegawai</h1>
         <div class="col box-header text-right">
+            <a href="{{url('/draft')}}" class="btn btn-rounded btn-warning" style="border-radius:30px;">Draft</a>
             <a href="{{url('/tambah-kinerja')}}" class="btn btn-primary" style="border-radius:30px;"><i class="fa fa-plus-circle" ></i &nbsp> Tambah Kinerja</a>
       </div><!-- /.col -->
     </div><!-- /.row -->
