@@ -77,8 +77,9 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <div class="float-right">
-                    <button type="submit" class="btn btn-primary" onclick="return confirm('Yakin ingin simpan?')">Simpan</button>
-                    <a href="{{url('/pegawai/kinerja-pegawai')}}" class="btn btn-warning">Batal</a>
+                    <button type="submit" class="btn btn-primary" onclick="return confirm('PEHATIAN! Silahkan cek terlebih dahulu. Karena data yang disubmit tidak bisa diubah dan hapus')">Submit</button>
+                    <a href="draft"><button type="save" class="btn btn-warning" onclick="return confirm('Simpan sebagai draft?')">Draft</button></a>
+                    <a href="kinerja-pegawai"><i class="btn btn-light">Batal</i></a>
                   </div>
                 </div>
               </form>
