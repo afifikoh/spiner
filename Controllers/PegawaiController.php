@@ -250,18 +250,46 @@ class PegawaiController extends Controller
     public function updateprofil(Request $request, $id)
     {
 $request->validate([
-        'foto' => 'required|image',
         'nama' => 'required',
         'alamat' => 'required',
         'email' => 'required',
+        'email' => 'required|unique:users',
         'no_hp' => 'required'
     ],
     [
-        'foto.required' => 'Pilih Foto!',
         'nama.required' => 'Nama tidak boleh kosong',
         'alamat.required' => 'Alamat tidak boleh kosong!',
         'email.required' => 'Email tidak boleh kosong!',
+        'email.unique' => 'Email sudah ada!',
         'no_hp.required' => 'No HP tidak boleh kosong!'
+    ]);
+        $users = User::find($id);
+            $users->nama      = $request->nama;
+            $users->alamat    = $request->alamat;
+            $users->email     = $request->email;
+            $users->no_hp    = $request->no_hp;
+        $users->update();
+
+        Alert::success('Berhasil', 'Data berhasil diubah');
+        return redirect('pengaturan-pegawai');
+    }
+    
+    public function editfoto(Request $request, $id)
+    {
+        $user = Auth::User();
+        $users = User::find($id);
+        return view('data_kinerja.edit_foto',compact('users'))->with([
+            "user" => $user,
+        ]);  
+    }
+
+    public function updatefoto(Request $request, $id)
+    {
+        $request->validate([
+        'foto' => 'required|image',
+    ],
+    [
+        'foto.required' => 'Pilih Foto!',
     ]);
 
         $foto = $request->file('foto');
@@ -271,14 +299,10 @@ $request->validate([
         $request->foto->move(public_path($path), $newFoto);
         $users = User::find($id);
             $users->foto      = $newFoto;
-            $users->nama      = $request->nama;
-            $users->alamat    = $request->alamat;
-            $users->email     = $request->email;
-            $users->no_hp    = $request->no_hp;
         $users->update();
 
-        Alert::success('Berhasil', 'Data berhasil diubah');
-        return redirect('pengaturan-pegawai');
+        Alert::success('Berhasil', 'Foto profil berhasil diubah');
+        return redirect('edit-profil-pegawai/{id}');
     }
  
     public function editpassword($id)
