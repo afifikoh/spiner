@@ -5,7 +5,7 @@
   <div class="container-fluid">
     <div class="col-sm-12">
     <div class="row mb-4">
-        <h1 class="md-0">DRAFT</h1>&nbsp;<a href="kinerja-pegawai" class="btn btn-rounded btn-primary" style="border-radius:30px;"><i class="fas fa-arrow-left"></i></a>
+        <a href="kinerja-pegawai" class="btn btn-rounded btn-primary" style="border-radius:30px;"><i class="fas fa-arrow-left"></i></a>&nbsp;<h1 class="md-0">DRAFT</h1>
         <div class="col box-header text-right">
             {{-- <a href="#" class="btn btn-warning">Draft</a>
             <a href="{{url('/tambah-kinerja')}}" class="btn btn-primary"><i class="fa fa-plus-circle" ></i &nbsp> Tambah Kinerja</a> --}}
@@ -28,7 +28,7 @@
                 <tr>
                   <th style="text-align:center">No</th>
                   <th style="text-align:center">Tgl</th>
-                  <th style="text-align:center">Hasil Kinerja</th>
+                  <th style="text-align:center">Rincian Kinerja</th>
                   <th style="text-align:center">Foto</th>
                   <th style="text-align:center">PDF</th>
                   <th style="text-align:center">Aksi</th>
@@ -49,7 +49,7 @@
                             {{-- <a href="#">
                             <button class="btn btn-warning" type="button"><i class="fas fa-edit"></i></button></a> --}}
                           <a href="/pegawai-hapus/{{ $k->id }}" class="btn btn-danger"><i class="fas fa-trash" onclick="return confirm('Yakin hapus data?')"></i></a>
-                          <button type="submit" class="btn btn-success" onclick="return confirm('Yakin ingin submit?')">Submit</button>
+                          <a href="/restore/{{ $k->id }}" class="btn btn-success" onclick="return confirm('Yakin ingin submit?')">Submit</a>
                     </div>
                   </td>
                 </tr>
