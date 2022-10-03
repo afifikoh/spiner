@@ -77,8 +77,8 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <div class="float-right">
-                    <button type="submit" class="btn btn-primary" onclick="return confirm('PEHATIAN! Silahkan cek terlebih dahulu. Karena data yang disubmit tidak bisa diubah dan hapus')">Submit</button>
-                    <a href="draft"><button type="save" class="btn btn-warning" onclick="return confirm('Simpan sebagai draft?')">Draft</button></a>
+                    <button name="angka" type="submit" value="0" class="btn btn-primary" onclick="return confirm('PEHATIAN! Silahkan cek terlebih dahulu. Karena data yang disubmit tidak bisa diubah dan hapus')">Submit</button>
+                    <a href="draft"><button name="angka" type="submit" value="1" class="btn btn-warning" onclick="return confirm('Simpan sebagai draft?')">Draft</button></a>
                     <a href="kinerja-pegawai"><i class="btn btn-light">Batal</i></a>
                   </div>
                 </div>
