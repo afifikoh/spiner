@@ -10,74 +10,36 @@ use Alert;
 
 class KinerjaController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $user = Auth::User();
-        // $kinerja=Kinerja::all();
-        // return view('data_kinerja.kinerja',compact('kinerja'))->with([
-        // "user" => $user,
+        $kinerja = Kinerja::where('angka', '0')->paginate(31);
+        $data = array
+        (
+            'kinerja' => $kinerja
+        );
 
-        $keyword = $request->keyword;
-        $kinerja = Kinerja::where('hasil','LIKE', '%'.$keyword.'%')
-        ->orWhere('hasil','LIKE', '%'.$keyword.'%')
-        ->paginate();
-        return view('data_kinerja.kinerja',compact('kinerja'))->with([
-        "user" => $user,
-    ]);
+        return view ('data_kinerja.kinerja', compact('kinerja'))->with([$data, "user" => $user]);
     }
-    
-    public function draft(Request $request)
+
+    public function draft()
     {
         $user = Auth::User();
-        $keyword = $request->keyword;
-        // $kinerja = Kinerja::all(); 
-        $kinerja = Kinerja::where('hasil','LIKE', '%'.$keyword.'%')
-        ->orWhere('hasil','LIKE', '%'.$keyword.'%')
-        ->paginate();
-        // $data = array
-        // (
-        //     'kinerja' => $kinerja   
-        // );
-        return view('data_kinerja.draft',compact('kinerja'))->with([
-            "user" => $user, 
-        ]);
+        $kinerja = Kinerja::where('angka', '1')->paginate(31);
+        $data = array
+        (
+            'kinerja' => $kinerja
+        );
+
+        return view ('data_kinerja.draft', compact('kinerja'))->with([$data, "user" => $user]);
     }
 
-    public function createdraft(Request $request)
+    public function restore($id)
     {
-        $validated = $request->validate([
-            'hasil'    => 'required',
-            'foto'       => 'required|mimes:jpeg,png,jpg',
-            'doc'       => 'required|mimes:pdf'
-        ],
-        [
-            'hasil.required' => 'Hasil tidak boleh kosong!',
-            'foto.required' => 'Foto tidak boleh kosong!',
-            'doc.required' => 'Doc harus diisi berupa .pdf!',
-        ]);  
-
-        $foto = $request->file('foto');
-        $newFoto = 'foto_kinerja' . '_' . time() . '.' . $foto->extension();
-
-        $doc = $request->file('doc');
-        $newDoc = 'doc_kinerja' . '_' . time() . '.' . $doc->extension();
-
-        $path = 'template/dist/img/kinerja/';
-        $request->foto->move(public_path($path), $newFoto);
-        $request->doc->move(public_path($path), $newDoc);
-        // $foto = $request->file('foto');
-        // $foto->storeAs('public/images', $foto->hashName());
-        // $doc = $request->file('doc');
-        // $doc->storeAs('public/images', $doc->hashName());
-
-        Kinerja::create([
-            'foto' => $newFoto,
-            'doc' => $newDoc,
-            'tgl' => $request->tgl,
-            'hasil' => $request->hasil,
-            'id_users' => Auth::user()->id
-        ]);
-        return redirect('draft');
+        $restore = Kinerja::find($id);
+        $restore->angka='0';
+        $restore->save();
+        return redirect('kinerja-pegawai');
     }
 
     public function create()
