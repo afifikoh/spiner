@@ -23,17 +23,8 @@
               <form action="/update/profil/pegawai/{{ $user->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
                   <div class="form-group">
-                      <img src="{{ asset ('img-user/'.$user->foto) }}" alt="user-image" class="img-circle elevation-2" width="15%">
-                      <input type="file" class="form-control-file 
-                      @error('foto')
-                      is-invalid
-                      @enderror" 
-                      id="foto" name="foto">
-                      @error('foto')
-                          <div class='invalid-feedback'>
-                              {{ $message }}
-                          </div>
-                      @enderror
+                       <img src="{{ asset ('img-user/'.$user->foto) }}" alt="user-image" class="img-circle elevation-2" width="15%">
+                       <a href="{{url('edit-foto-profil/{id}')}}">&nbsp;&nbsp;&nbsp;Ubah Foto Profil</a>
                   </div>
                   <div class="form-group">
                       <label for="nama">Nama</label>
