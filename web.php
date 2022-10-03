@@ -66,6 +66,8 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::get("pengaturan-pegawai", [KinerjaController::class, 'pengaturan']);
         Route::get("edit-profil-pegawai/{id}", [PegawaiController::class, 'editprofil']);
         Route::post('/update/profil/pegawai/{id}', [PegawaiController::class, 'updateprofil']);
+        Route::get("edit-foto-profil/{id}", [PegawaiController::class, 'editfoto']);
+        Route::post("/update/foto/profil/pegawai/{id}", [PegawaiController::class, 'updatefoto']);
         Route::get("edit-password-pegawai/{id}", [PegawaiController::class, 'editpassword']);
         Route::post('/update/password/pegawai/{id}', [PegawaiController::class, 'updatepassword']);
         Route::get("laporan-pegawai", [KinerjaController::class, 'laporan']);
