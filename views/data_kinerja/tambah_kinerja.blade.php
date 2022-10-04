@@ -21,23 +21,19 @@
   <div class="col-sm-12">
     <div class="card">
               <form action="kinerja-add" method="post" enctype="multipart/form-data">
-                {{-- @isset($message)
-                    <div class="alert alert-success">
-                    <strong>{{$message}}</strong>
-                    </div>
-                @endif --}}
                 <div class="card-body">
                   @csrf
+                  
                   <div class="form-group col-md-2">
                     <label for="tgl">Tanggal</label><span class="text-danger">*</span>
                     <input type="text" id="tgl" name="tgl" class="form-control" readonly value="{{ date("d/m/Y") }} " data-target="#tgl" data-toggle="datetimepicker">
                   </div>
                   <div class="form-group col-md-5">
-                    <label for="hasil">Hasil Kinerja</label><span class="text-danger">*</span>
+                    <label for="hasil">Rincian Kinerja</label><span class="text-danger">*</span>
                     <textarea class="form-control 
                     @error('hasil')
                     is-invalid
-                    @enderror" id="hasil" name="hasil" rows="4" placeholder="Masukkan Hasil Kinerja"></textarea>
+                    @enderror" id="hasil" name="hasil" rows="4" placeholder="Masukkan Rincian Kinerja"></textarea>
                     @error('hasil')
                           <div class='invalid-feedback'>
                              {{ $message }}
@@ -72,16 +68,17 @@
                           </div>
                       @enderror
                     </div>
+                  </div>   
+                  <div class="float-right">  
+                      <input type="radio" class="form-check-input" id="option1" name="angka" value="0" onclick="return confirm('PEHATIAN! Silahkan cek terlebih dahulu. Karena data yang disubmit tidak bisa diubah dan hapus')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label for="option1" class="form-check-input">Submit</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <input type="radio" class="form-check-input" id="option2" name="angka" value="1" onclick="return confirm('Simpan sebagai draft?')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label for="option2" class="form-check-input">Draft</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+                      <button type="submit" class="btn btn-primary">Simpan</button>
+                      <a href="kinerja-pegawai"><i class="btn btn-light">Batal</i></a> 
                   </div>
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer">
-                  <div class="float-right">
-                    <button name="angka" type="submit" value="0" class="btn btn-primary" onclick="return confirm('PEHATIAN! Silahkan cek terlebih dahulu. Karena data yang disubmit tidak bisa diubah dan hapus')">Submit</button>
-                    <a href="draft"><button name="angka" type="submit" value="1" class="btn btn-warning" onclick="return confirm('Simpan sebagai draft?')">Draft</button></a>
-                    <a href="kinerja-pegawai"><i class="btn btn-light">Batal</i></a>
-                  </div>
-                </div>
               </form>
             </div>
             </div>
