@@ -13,13 +13,14 @@ class KinerjaController extends Controller
     public function index()
     {
         $user = Auth::User();
-        $kinerja = Kinerja::where('angka', '0')->paginate(31);
+        $pegawai = Auth::user()->id;
+        $kinerja = Kinerja::where('angka', '0')->where('id_users',$pegawai)->paginate(31);
         $data = array
         (
             'kinerja' => $kinerja
         );
 
-        return view ('data_kinerja.kinerja', compact('kinerja'))->with([$data, "user" => $user]);
+        return view ('data_kinerja.kinerja', compact('kinerja','hasilkinerja'))->with([$data,"user" => $user]);
     }
 
     public function draft()
