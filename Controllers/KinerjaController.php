@@ -87,7 +87,8 @@ class KinerjaController extends Controller
         $validated = $request->validate([
             'hasil'    => 'required',
             'foto'       => 'required|mimes:jpeg,png,jpg',
-            'doc'       => 'required|mimes:pdf'
+            'doc'       => 'required|mimes:pdf',
+            'angka'     => 'required'
         ],
         [
             'hasil.required' => 'Hasil tidak boleh kosong!',
