@@ -69,13 +69,17 @@
                       @enderror
                     </div>
                   </div>   
-                  <div class="float-right">  
-                      <input type="radio" class="form-check-input" id="option1" name="angka" value="0" onclick="return confirm('PEHATIAN! Silahkan cek terlebih dahulu. Karena data yang disubmit tidak bisa diubah dan hapus')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <label for="option1" class="form-check-input">Submit</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <input type="radio" class="form-check-input" id="option2" name="angka" value="1" onclick="return confirm('Simpan sebagai draft?')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <label for="option2" class="form-check-input">Draft</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
-                      <button type="submit" class="btn btn-primary">Simpan</button>
+                  <div class="float-right"> 
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-primary">
+                        <input type="radio" name="angka" id="option1" value="0" onclick="return confirm('PEHATIAN! Silahkan cek terlebih dahulu. Karena data yang disubmit tidak bisa diubah dan hapus')"> Submit
+                      </label>
+                      <label class="btn btn-warning">
+                        <input type="radio" name="angka" id="option2" value="1" onclick="return confirm('Simpan sebagai draft?')"> Draft
+                      </label>
+                      <button type="submit" class="btn btn-success">Simpan</button>
                       <a href="kinerja-pegawai"><i class="btn btn-light">Batal</i></a> 
+                    </div> 
                   </div>
                 </div>
                 <!-- /.card-body -->
