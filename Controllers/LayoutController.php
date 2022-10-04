@@ -10,7 +10,9 @@ class LayoutController extends Controller
     public function index()
     {
         $user = Auth::User();
-        return view("layout.home")->with([
+        $pegawai = Auth::user()->id;
+        $hasilkinerja = Kinerja::where('angka', '0')->where('id_users',$pegawai)->count();
+        return view("layout.home",compact('hasilkinerja'))->with([
             "user" => $user,
         ]);
     }
