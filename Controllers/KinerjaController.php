@@ -20,7 +20,7 @@ class KinerjaController extends Controller
             'kinerja' => $kinerja
         );
 
-        return view ('data_kinerja.kinerja', compact('kinerja','hasilkinerja'))->with([$data,"user" => $user]);
+        return view ('data_kinerja.kinerja', compact('kinerja'))->with([$data,"user" => $user]);
     }
 
     public function draft()
