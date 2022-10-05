@@ -25,7 +25,8 @@ return new class extends Migration
             $table->text('foto')->nullable();
             $table->text('doc')->nullable();
             $table->string('tgl');
-            // $table->string('status');
+            $table->enum("angka", ["0", "1"]);
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
