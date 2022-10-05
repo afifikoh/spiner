@@ -41,6 +41,7 @@
             <thead>
               <tr>
                 <th style="text-align:center">No</th>
+                <th style="text-align:center">Nama</th>
                 <th style="text-align:center">Tgl</th>
                 <th style="text-align:center">Hasil</th>
                 <th style="text-align:center">Foto</th>
@@ -48,6 +49,21 @@
               </tr>
             </thead>
             {{-- <tbody> --}}
+              <tbody>
+                @php $no=1; @endphp
+                @foreach ($kinerja as $data)
+                <tr class="odd">
+                  
+                  <td>{{ $no++ }}</td>
+                  <td>{{ $data->nama_pgw->nama }}</td>
+                  <td>{{ $data['tgl'] }}</td>
+                  <td>{{ $data['hasil'] }}</td>
+                  <td class="text-center"><a href="{{ asset('template/dist/img/kinerja/'.$data['foto']) }}" class="btn btn-rounded btn-info style="border-radius:30px;""><i class="far fa-file-image"></i></a></td>
+                  <td class="text-center"><a href="{{ asset('template/dist/img/kinerja/'.$data['doc']) }}" class="btn btn-rounded btn-info style="border-radius:30px;""><i class="far fa-file-pdf"></i></a></td>                  
+                
+                </tr>
+                @endforeach
+              </tbody>
           </table>
         </div>
     </div>
