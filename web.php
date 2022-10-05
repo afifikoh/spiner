@@ -75,16 +75,19 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::get("tambah-kinerja", [KinerjaController::class, 'create']);
         Route::post("/kinerja-add", [KinerjaController::class, 'store']);
         Route::get('pegawai/hapus/{id}', [KinerjaController::class, 'destroy'])->name('destroy');
+        Route::resource("laporan-terverifikasi", LaporanController::class);
+
        
     });
-
-    Route::group(
-        ["middleware" => ["ceklevel:sub-koordinator,kepala-bidang"]],
-        function () {
-            Route::resource("kinerja", KinerjaController::class);
-            Route::resource("pengaturan", PengaturanController::class);
-        }
-    );
+    
+    Route::group(["middleware" => ["ceklevel:kepala-bidang"]], function () {
+        Route::get("kinerja-kepala", [KepBidangController::class, "index"]);
+        Route::post("/kepala-bidang/ubah/{id}", [
+            KepBidangController::class,
+            "completedUpdate",
+        ])->name("completedUpdate");
+        Route::get("pengaturan-kepala", [PengaturanController::class, "index"]);
+    });
 });
 
 // Route::get('/admin/data_pegawai', [PegawaiController::class,'index','store']);
