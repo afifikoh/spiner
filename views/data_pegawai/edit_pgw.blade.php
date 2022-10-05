@@ -118,7 +118,7 @@
                                             @error('tgl_lahir')
                                             is-invalid
                                             @enderror
-                                            " placeholder="Masukan Tanggal Lahir" value="{{ old('tgl_lahir') }}">
+                                            " placeholder="Masukan Tanggal Lahir" value="{{ $users->tgl_lahir }}">
                                             
                                             @error('tgl_lahir')
                                                 <div class='invalid-feedback'>
@@ -161,7 +161,7 @@
                                               <select name="thn_masuk" class="form-control @error('thn_masuk')
                                               is-invalid
                                               @enderror">
-                                                {{-- <option value="{{ $users->thn_masuk }}" selected="selected">{{ $users->thn_masuk }}</option> --}}
+
                                                 <?php for ($i = date("Y"); $i >= date("Y") - 32; $i -= 1) {?>
                                                     <option value="{{ $i }}" {{ ($users->thn_masuk == $i)? 'selected': ''; }}>{{ $i }}</option>
                                                 <?php } ?>
@@ -182,19 +182,18 @@
                                             is-invalid
                                             @enderror
                                             " id="bln_masuk" placeholder="- Pilih Bulan Masuk -" >
-                                                <option value=""></option>              
                                                 <option value="01" {{ ($users->bln_masuk == '01')? 'selected': ''; }}>Januari</option>
                                                 <option value="02" {{ ($users->bln_masuk == '02')? 'selected': ''; }}>Februari</option>
                                                 <option value="03" {{ ($users->bln_masuk == '03')? 'selected': ''; }}>Maret</option>
-                                                <option value="04" {{ ($users->bln_masuk == '04')? 'selected': ''; }}>04</option>
-                                                <option value="05" {{ ($users->bln_masuk == '05')? 'selected': ''; }}>05</option>
-                                                <option value="06" {{ ($users->bln_masuk == '06')? 'selected': ''; }}>06</option>
-                                                <option value="07" {{ ($users->bln_masuk == '07')? 'selected': ''; }}>07</option>
-                                                <option value="08" {{ ($users->bln_masuk == '08')? 'selected': ''; }}>08</option>
-                                                <option value="09" {{ ($users->bln_masuk == '09')? 'selected': ''; }}>09</option>
-                                                <option value="10" {{ ($users->bln_masuk == '10')? 'selected': ''; }}>10</option>
-                                                <option value="11" {{ ($users->bln_masuk == '11')? 'selected': ''; }}>11</option>
-                                                <option value="12" {{ ($users->bln_masuk == '12')? 'selected': ''; }}>12</option>
+                                                <option value="04" {{ ($users->bln_masuk == '04')? 'selected': ''; }}>April</option>
+                                                <option value="05" {{ ($users->bln_masuk == '05')? 'selected': ''; }}>Mei</option>
+                                                <option value="06" {{ ($users->bln_masuk == '06')? 'selected': ''; }}>Juni</option>
+                                                <option value="07" {{ ($users->bln_masuk == '07')? 'selected': ''; }}>Juli</option>
+                                                <option value="08" {{ ($users->bln_masuk == '08')? 'selected': ''; }}>Agustus</option>
+                                                <option value="09" {{ ($users->bln_masuk == '09')? 'selected': ''; }}>September</option>
+                                                <option value="10" {{ ($users->bln_masuk == '10')? 'selected': ''; }}>Oktober</option>
+                                                <option value="11" {{ ($users->bln_masuk == '11')? 'selected': ''; }}>November</option>
+                                                <option value="12" {{ ($users->bln_masuk == '12')? 'selected': ''; }}>Desember</option>
                                             </select>
                                             
                                             @error('bln_masuk')
@@ -284,7 +283,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="level">Level</label>
                                             <select name="level" class="custom-select 
@@ -308,14 +307,14 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    {{-- <div class="col-sm-3">
                                         <div class="form-group">
                                             <div class="custome file @error('foto')
                                             is-invalid
                                             @enderror">
                                                 <label for="foto">Foto</label>
                                                 <label> </label>
-                                                {{-- <img src="{{ asset ('img-user/'.$user->foto) }}" alt="user-image" class="img-circle elevation-2" width="15%"> --}}
+                                                <img src="{{ asset ('img-user/'.$user->foto) }}" alt="user-image" class="img-circle elevation-2" width="15%">
                                                 <input type="file" class="form-control " name="foto" value="{{ $users->foto }}">
                                                 
                                             </div>
@@ -325,7 +324,7 @@
                                                 </div>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 
                                 <div class="row">
