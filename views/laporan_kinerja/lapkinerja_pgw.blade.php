@@ -16,9 +16,12 @@
                               <label for="tglakhir">Tanggal Akhir</label>
                                <input type="date" class="form-control" id="tglakhir">
                           </div>
+                          <div class="form-group col-md-2" style="padding-top: 40px;">           
+                            <button type="submit" class="btn btn-primary">Tampilkan</button>
+                         </div>
           </form>
           <div class="col box-header text-right" style="float: right; ">
-              <a class="btn btn-success btn-sm">&nbsp;&nbsp;&nbsp;<b>Print&nbsp;&nbsp;&nbsp;</b><p><i class="fa fa-print fa-1x"></i></p></a>
+              <a class="btn btn-success btn-sm">&nbsp;&nbsp;&nbsp;<b>Export PDF&nbsp;&nbsp;&nbsp;</b><p><i class="far fa-file-pdf"></i></p></a>
           </div><!-- /.col -->
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -37,14 +40,14 @@
         <div class="card-body">
           <div class="row">
             <div class="col-sm-12">
-              <table id="tb_kinerja" class="table table-bordered table-hover ">
+              <table id="dt-table" class="table table-bordered table-hover ">
             <thead>
               <tr>
                 <th style="text-align:center">No</th>
-                <th style="text-align:center">Hari</th>
                 <th style="text-align:center">Tgl</th>
                 <th style="text-align:center">Hasil</th>
-                <th style="text-align:center">Bukti</th>
+                <th style="text-align:center">Foto</th>
+                <th style="text-align:center">Doc</th>
               </tr>
             </thead>
             {{-- <tbody> --}}
@@ -59,8 +62,3 @@
 
       <!-- CONTENT -->
       @endsection
-      @push('main-script')
-      <script>
-        $('#tb_kinerja').dataTable();
-      </script>
-    @endpush
