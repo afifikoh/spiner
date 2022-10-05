@@ -40,6 +40,7 @@ class KinerjaController extends Controller
         $restore = Kinerja::find($id);
         $restore->angka='0';
         $restore->save();
+        Alert::success('Berhasil', 'Data berhasil disubmit');
         return redirect('kinerja-pegawai');
     }
 
