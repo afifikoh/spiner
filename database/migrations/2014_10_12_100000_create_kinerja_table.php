@@ -16,6 +16,7 @@ return new class extends Migration
     {
         Schema::create('kinerja', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('id_users');
             // $table->string('kd_dinas');
             // $table->string('bidang');
             // $table->string('nip');
