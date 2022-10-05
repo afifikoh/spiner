@@ -68,7 +68,8 @@
                           </div>
                       @enderror
                     </div>
-                  </div>   
+                  </div> 
+                  <input hidden type="status" class="form-control" id="status" name="status" value="pending">
                   <div class="float-right"> 
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                       <label class="btn btn-primary">
