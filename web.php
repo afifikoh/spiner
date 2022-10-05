@@ -62,7 +62,8 @@ Route::group(["middleware" => ["auth"]], function () {
 
     Route::group(["middleware" => ["ceklevel:pegawai"]], function () {
         Route::get("kinerja-pegawai", [KinerjaController::class, 'index','store']);
-        Route::get("draft", [KinerjaController::class, 'draft','createdraft']);
+        Route::get("draft", [KinerjaController::class, 'draft','store']);
+        Route::get("restore/{id}", [KinerjaController::class, 'restore']);
         Route::get("pengaturan-pegawai", [KinerjaController::class, 'pengaturan']);
         Route::get("edit-profil-pegawai/{id}", [PegawaiController::class, 'editprofil']);
         Route::post('/update/profil/pegawai/{id}', [PegawaiController::class, 'updateprofil']);
