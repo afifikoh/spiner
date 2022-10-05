@@ -40,6 +40,7 @@
               <th style="text-align:center">Hasil Kinerja</th>
               <th style="text-align:center">Foto</th>
               <th style="text-align:center">PDF</th>
+              <th style="text-align:center">Status</th>
               <th style="text-align:center">Aksi</th>
             </tr>
           </thead>
