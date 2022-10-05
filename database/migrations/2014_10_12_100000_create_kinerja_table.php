@@ -29,6 +29,14 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->timestamps();
         });
+        Schema::table('kinerja', function ($table) {
+            $table
+                ->foreign('id_users')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+        });
     }
 
     /**
