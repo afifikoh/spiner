@@ -118,8 +118,15 @@ class KinerjaController extends Controller
             'angka' => $request->angka,
             'user_id' => Auth::user()->id
         ]);
+        
+        //alert berhasil simpan draft atau submit
+        if($request->angka=='1'){
+        Alert::success('Berhasil', 'Data berhasil disimpan dalam draft');
+        return redirect('draft');
+        } else{
         Alert::success('Berhasil', 'Data berhasil disimpan');
         return redirect('kinerja-pegawai');
+        }
     }
 
     public function destroy($id, Request $request)
