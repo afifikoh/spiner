@@ -24,13 +24,29 @@
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label for="nip">NIP</label>
-                                            <input type="text" name='nip' class="form-control
+                                            {{-- <label hidden for="nip">NIP</label>
+                                            <input hidden type="text" name='nip' autocomplete="off" class="form-control
                                             @error('nip')
                                                 is-invalid
                                             @enderror
-                                            " id="nip" placeholder="Masukan NIP" value="{{ old('nip') }}" >
+                                            " id="nip" placeholder="Masukan NIP" >
                                             @error('nip')
+                                                <div class='invalid-feedback'>
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror --}}
+                                            <label for="level">Level</label>
+                                            <select name="level" class="custom-select 
+                                            @error('level')
+                                            is-invalid
+                                            @enderror
+                                            " id="level" placeholder="- Pilih Level -" value="{{ old('level') }}" >
+                                                <option>- pilih Level -</option>
+                                                <option value="kepala-bidang">Kepala Bidang</option>
+                                                {{-- <option value="sub-koordiator">Sub Koordinator</option> --}}
+                                                <option value="pegawai">Pegawai</option>
+                                            </select>
+                                            @error('level')
                                                 <div class='invalid-feedback'>
                                                     {{ $message }}
                                                 </div>
@@ -39,13 +55,22 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label for="nik">NIK</label>
-                                            <input type="text" name='nik'autocomplete="off" class="form-control
-                                            @error('nik')
+                                            <label for="nip">NIP</label>
+                                            <select name="nip" class="custom-select
+                                            @error('nip')
+                                            is-invalid
+                                            @enderror" id="bidang" placeholder="- Pilih NIP -" value="{{ old('nip') }}">
+                                                <option>- Pilih NIP jika Kepala Bidang -</option>
+                                                @foreach ($bidang as $data)
+                                                    <option value="{{ $data->nip }}"> {{ $data->bidang }} </option>
+                                                @endforeach
+                                            </select>
+                                            {{-- <input type="text" name='nip' autocomplete="off" class="form-control
+                                            @error('nip')
                                                 is-invalid
                                             @enderror
-                                            " id="nik" placeholder="Masukan NIK" value="{{ old('nik') }}">
-                                            @error('nik')
+                                            " id="nip" placeholder="Masukan NIP" value=""> --}}
+                                            @error('nip')
                                                 <div class='invalid-feedback'>
                                                     {{ $message }}
                                                 </div>
@@ -64,7 +89,7 @@
                                             <select name="bidang" class="custom-select
                                             @error('bidang')
                                             is-invalid
-                                            @enderror " id="bidang" placeholder="- Pilih Bidang -" value="{{ old('bidang') }}">
+                                            @enderror" id="bidang" placeholder="- Pilih Bidang -" value="{{ old('bidang') }}">
                                                 <option>- Pilih Bidang -</option>
                                                 @foreach ($bidang as $data)
                                                     <option value="{{ $data->id }}"> {{ $data->bidang }} </option>
@@ -79,15 +104,30 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="nama">Nama</label>
                                             <input type="text" name="nama" autocomplete="off" class="form-control
                                             @error('nama')
                                             is-invalid
                                             @enderror
-                                            " id="nama" placeholder="Masukan Nama" value="{{ old('nama') }}" >
+                                            " id="nama" placeholder="Masukan Nama"  value="{{ old('nama') }}" >
                                             @error('nama')
+                                                <div class='invalid-feedback'>
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="nik">NIK</label>
+                                            <input type="text" name='nik' autocomplete="off" class="form-control
+                                            @error('nik')
+                                                is-invalid
+                                            @enderror
+                                            " id="nip" placeholder="Masukan NIK" >
+                                            @error('nik')
                                                 <div class='invalid-feedback'>
                                                     {{ $message }}
                                                 </div>
@@ -101,7 +141,7 @@
                                             @error('jabatan')
                                             is-invalid
                                             @enderror
-                                            " id="jabatan" placeholder="Masukan Jabatan" value="{{ old('jabatan') }}">
+                                            " id="jabatan" placeholder="Masukan Jabatan" >
                                             @error('jabatan')
                                                 <div class='invalid-feedback'>
                                                     {{ $message }}
@@ -114,17 +154,23 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="tgl_lahir">Tanggal Lahir</label>
-                                            <input type="date" name="tgl_lahir" id="date" class="form-control
+                                            <input type="text" name="tgl_lahir" id="tgl_lahir" autocomplete="off" class="date form-control
                                             @error('tgl_lahir')
                                             is-invalid
                                             @enderror
-                                            " placeholder="" value="{{ old('tgl_lahir') }}">
+                                            " placeholder="Masukan Tanggal Lahir" value="{{ old('tgl_lahir') }}">
+                                            
                                             @error('tgl_lahir')
                                                 <div class='invalid-feedback'>
                                                     {{ $message }}
                                                 </div>
                                             @enderror
                                         </div>
+                                        <script type="text/javascript">
+                                            $('.date').datepicker({  
+                                               format: 'yyyy mm dd'
+                                             });  
+                                        </script> 
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
@@ -146,25 +192,29 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
-                                        <div>
-                                            <label for="tahun-masuk">Tahun Masuk</label>
-                                              <select name="tahun" class="form-control">
+                                        <div class="form-group">
+                                            <label for="thn_masuk">Tahun Masuk</label>
+                                              <select name="thn_masuk" class="form-control @error('thn_masuk')
+                                              is-invalid
+                                              @enderror">
                                                 <option selected="selected">~ Pilih Tahun Masuk ~</option>
                                                 <?php for ($i = date("Y"); $i >= date("Y") - 32; $i -= 1) {
                                                     echo "<option value='$i'> $i </option>";
                                                 } ?>
                                                 </select>
-                                          </div>
+                                            @error('thn_masuk')
+                                                <div class='invalid-feedback'>
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <div class="col-sm-3">
-                                        {{-- <div class="form-group">
+                                        <div class="form-group">
                                             <label for="bln_masuk">Bulan Masuk</label>
-                                            <input type="text" name="bln_masuk" class="form-control" placeholder="Masukan Bulan Masuk" required>
-                                            
-                                        </div> --}}
-                                        <div>
-                                            <label for="bulan-masuk">Bulan Masuk</label>
-                                            <select name="bulan" class="form-control">
+                                            <select name="bln_masuk" class="form-control @error('bln_masuk')
+                                            is-invalid
+                                            @enderror">
                                               <option selected="selected">~ Pilih Bulan Masuk ~</option>
                                               <?php
                                               $bln = [
@@ -190,7 +240,12 @@
                                               }
                                               ?>
                                               </select>
-                                          </div>
+                                            @error('bln_masuk')
+                                                <div class='invalid-feedback'>
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -242,7 +297,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="password">Password</label>
-                                            <input type="text" name="password" class="form-control
+                                            <input type="password" name="password" class="form-control
                                             @error('email')
                                             is-invalid
                                             @enderror
@@ -259,11 +314,10 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="alamat">Alamat</label>
-                                            <textarea name="alamat" autocomplete="off" class="form-control
-                                            @error('email')
+                                            <textarea name="alamat" class="form-control
+                                            @error('alamat')
                                             is-invalid
-                                            @enderror
-                                            " rows="3" placeholder="Masukan Alamat" value="{{ old('alamat') }}">
+                                            @enderror" rows="3" placeholder="Masukan Alamat" > {{ old('alamat')}}
                                             </textarea>
                                             @error('alamat')
                                             <div class='invalid-feedback'>
@@ -272,7 +326,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    {{-- <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="level">Level</label>
                                             <select name="level" class="custom-select 
@@ -281,7 +335,7 @@
                                             @enderror
                                             " id="level" placeholder="- Pilih Level -" value="{{ old('level') }}" >
                                                 <option>- pilih Level -</option>
-                                                <option value="kepala-bidang">kepala Bidang</option>
+                                                <option value="kepala-bidang">Kepala Bidang</option>
                                                 <option value="sub-koordiator">Sub Koordinator</option>
                                                 <option value="pegawai">Pegawai</option>
                                             </select>
@@ -291,8 +345,8 @@
                                                 </div>
                                             @enderror
                                         </div>
-                                    </div>
-                                    <div class="col-sm-3">
+                                    </div> --}}
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <div class="custome file @error('foto')
                                             is-invalid
@@ -303,7 +357,7 @@
                                                 <input type="file" class="form-control " name="foto">
                                                 
                                             </div>
-                                            @error('level')
+                                            @error('foto')
                                                 <div class='invalid-feedback'>
                                                     {{ $message }}
                                                 </div>
@@ -327,5 +381,6 @@
             </div>
         </div>
     </div>
+    
 </section>
 @endsection
