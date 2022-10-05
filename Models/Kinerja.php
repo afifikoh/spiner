@@ -14,6 +14,9 @@ class Kinerja extends Model
         'foto',
         'doc',
         'hasil'
+        'id_users',
+        'angka',
+        'status',
     ];
     protected $table = 'kinerja';
 }
