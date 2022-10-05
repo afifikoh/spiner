@@ -19,4 +19,9 @@ class Kinerja extends Model
         'status',
     ];
     protected $table = 'kinerja';
+    
+    public function nama_pgw()
+    {
+        return $this->belongsTo(User::class, 'user_id','id');
+    }
 }
