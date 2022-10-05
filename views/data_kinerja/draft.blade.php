@@ -41,15 +41,15 @@
                     <td class="text-center">{{$no++}}</td>
                     <td class="text-center">{{$k->tgl}}</td>
                     <td class="text-center">{{$k->hasil}}</td>
-                    <td class="text-center"><a href="{{ asset('template/dist/img/kinerja/'.$k['foto']) }}" class="btn btn-rounded btn-info"><i class="far fa-file-image"></i></a></td>
-                    <td class="text-center"><a href="{{ asset('template/dist/img/kinerja/'.$k['doc']) }}" class="btn btn-rounded btn-info"><i class="far fa-file-pdf"></i></a></td>
+                    <td class="text-center"><a href="{{ asset('template/dist/img/kinerja/'.$k['foto']) }}" class="btn btn-rounded btn-info" style="border-radius:30px;"><i class="far fa-file-image"></i></a></td>
+                    <td class="text-center"><a href="{{ asset('template/dist/img/kinerja/'.$k['doc']) }}" class="btn btn-rounded btn-info" style="border-radius:30px;"><i class="far fa-file-pdf"></i></a></td>
                     <td>
                     <div class="d-grid gap-2 d-md-block" style="text-align:center">
                         {{-- <div class="d-grid gap-2 d-md-block" style="text-align:center"> --}}
                             {{-- <a href="#">
                             <button class="btn btn-warning" type="button"><i class="fas fa-edit"></i></button></a> --}}
-                          <a href="/pegawai-hapus/{{ $k->id }}" class="btn btn-danger"><i class="fas fa-trash" onclick="return confirm('Yakin hapus data?')"></i></a>
-                          <a href="/restore/{{ $k->id }}" class="btn btn-success" onclick="return confirm('Yakin ingin submit?')">Submit</a>
+                          <a href="/pegawai-hapus/{{ $k->id }}" class="btn btn-danger" style="border-radius:30px;"><i class="fas fa-trash" onclick="return confirm('Yakin hapus data?')"></i></a>
+                          <a href="/restore/{{ $k->id }}" class="btn btn-success" style="border-radius:30px;" onclick="return confirm('Yakin ingin submit?')">Submit</a>
                     </div>
                   </td>
                 </tr>
