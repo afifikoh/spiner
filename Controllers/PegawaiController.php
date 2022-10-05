@@ -348,10 +348,11 @@ $request->validate([
         return redirect('pegawai')->with(['success'=>'Data Berhasil Dihapus!']);
     }
     
-    public function laporan()
+    public function laporan(Request $request)
     {
         $user = Auth::User();
-        return view('laporan_kinerja.lapkinerja_adm')->with([
+        $kinerja = Kinerja::with('nama_pgw')->where('angka', '0')->where('status', 'success')->paginate(31);
+        return view('laporan_kinerja.lapkinerja_adm', compact('kinerja'))->with([
             "user" => $user,
         ]);
     }
