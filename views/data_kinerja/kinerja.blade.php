@@ -52,6 +52,7 @@
                 <td class="text-center">{{$k->hasil}}</td>
                 <td class="text-center"><a href="{{ asset('template/dist/img/kinerja/'.$k['foto']) }}" class="btn btn-rounded btn-info style="border-radius:30px;""><i class="far fa-file-image"></i></a></td>
                 <td class="text-center"><a href="{{ asset('template/dist/img/kinerja/'.$k['doc']) }}" class="btn btn-rounded btn-info style="border-radius:30px;""><i class="far fa-file-pdf"></i></a></td>
+                <td class="text-center"><div class="badge {{ $k->status == "pending" ? "badge-warning" : "badge-success" }}">{{ $k->status }}</div></td>
                 <td>
                 <div class="d-grid gap-2 d-md-block" style="text-align:center">
                   <a href="/edit-kinerja-pegawai/{{ $k->id }}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
