@@ -115,8 +115,9 @@ class KinerjaController extends Controller
             'doc' => $newDoc,
             'tgl' => $request->tgl,
             'hasil' => $request->hasil,
+            'angka' => $request->angka,
+            'user_id' => Auth::user()->id
         ]);
-        // $message="Berhasil Simpan Data";
         Alert::success('Berhasil', 'Data berhasil disimpan');
         return redirect('kinerja-pegawai');
     }
