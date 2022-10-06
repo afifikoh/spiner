@@ -315,27 +315,25 @@ $request->validate([
         ]);  
     }
 
-    public function updatepassword(Request $request, $id)
+   public function updatepassword(Request $request, $id)
     {
     // $user = Auth::User();
     $users = User::find($id);
+    if(!(Hash::check($request->password_lama, auth()->User()->password))){
+        return back()->with("error", "Password tidak sesuai!");
+    }
     $request->validate([
-        'password_lama' => 'required|same:password',
+        'password_lama' => 'required',
         'password_baru' => 'required',
         'password_konfirmasi' => 'same:password_baru'
     ],
     [
-        'password_lama.same' => 'Password tidak sesuai!',
         'password_lama.required' => 'Password tidak boleh kosong',
         'password_baru.required' => 'Password baru tidak boleh kosong!',
-        'password_konfirmasi.same' => 'Password baru dan konfirmasi password harus sama!',
+        'password_konfirmasi.same' => 'Password baru dan konfirmasi password harus sama!'
     ]);
 
-    if(!Hash::check($request->password_lama, auth()->user()->password)){
-        return back()->with("error", "Password tidak sesuai!");
-    }
-
-    User::whereId(auth()->user()->id)->update([
+    User::whereId(auth()->User()->id)->update([
         'password' => Hash::make($request->password_baru)
     ]);
 
