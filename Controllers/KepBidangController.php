@@ -15,9 +15,10 @@ class KepBidangController extends Controller
         $user = Auth::User();
         $pending_kinerja = DB::table("kinerja")
             ->leftJoin("users", "kinerja.user_id", "=", "users.id")
+            ->leftJoin("bidang", "users.bidang", "=", "bidang.bidang")
             ->where("kinerja.status", "=", "pending")
             ->where("users.level", "=", "pegawai")
-            // ->where("users.bidang", "=", "bidang")
+            ->where("users.bidang", "=", $user->bidang)
             ->select(
                 "users.nama",
                 "kinerja.id",
@@ -25,10 +26,11 @@ class KepBidangController extends Controller
                 "kinerja.foto",
                 "kinerja.doc",
                 "kinerja.tgl",
-                "kinerja.status"
+                "kinerja.status",
+                "users.bidang"
+                // DB::raw("CONCAT(kinerja.foto,' ',kinerja.doc) as bukti")
             )
             ->get();
-        // dd($users);
         return view(
             "kepala-bidang.kinerja-kepala",
             compact("pending_kinerja")
