@@ -26,7 +26,7 @@
                   
                   <div class="form-group col-md-2">
                     <label for="tgl">Tanggal</label><span class="text-danger">*</span>
-                    <input type="text" id="tgl" name="tgl" class="form-control" readonly value="{{ date("d/m/Y") }} " data-target="#tgl" data-toggle="datetimepicker">
+                    <input type="text" id="tgl" name="tgl" class="form-control" readonly value="{{ date("d/m/Y") }}" data-target="#tgl" data-toggle="datetimepicker">
                   </div>
                   <div class="form-group col-md-5">
                     <label for="hasil">Rincian Kinerja</label><span class="text-danger">*</span>
@@ -68,15 +68,15 @@
                           </div>
                       @enderror
                     </div>
-                  </div> 
-                  <input hidden type="status" class="form-control" id="status" name="status" value="pending">
+                    <input hidden type="status" class="form-control" id="status" name="status" value="pending">
+                  </div>   
                   <div class="float-right"> 
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                       <label class="btn btn-primary">
-                        <input type="radio" name="angka" id="option1" value="0" onclick="return confirm('PEHATIAN! Silahkan cek terlebih dahulu. Karena data yang disubmit tidak bisa diubah dan hapus')"> Submit
+                        <input type="radio" name="status" id="option1" value="pending" onclick="return confirm('PEHATIAN! Silahkan cek terlebih dahulu. Karena data yang disubmit tidak bisa diubah dan hapus')"> Submit
                       </label>
                       <label class="btn btn-warning">
-                        <input type="radio" name="angka" id="option2" value="1" onclick="return confirm('Simpan sebagai draft?')"> Draft
+                        <input type="radio" name="status" id="option2" value="draft" onclick="return confirm('Simpan sebagai draft?')"> Draft
                       </label>
                       <button type="submit" class="btn btn-success">Simpan</button>
                       <a href="kinerja-pegawai"><i class="btn btn-light">Batal</i></a> 
