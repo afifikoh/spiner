@@ -10,11 +10,12 @@ use Alert;
 
 class KinerjaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::User();
         $pegawai = Auth::user()->id;
-        $kinerja = Kinerja::where('angka', '0')->where('id_users',$pegawai)->paginate(31);
+        $keyword = $request->keyword;
+        $kinerja = Kinerja::where('user_id',$pegawai)->where('hasil','LIKE', '%'.$keyword.'%')->paginate();
         $data = array
         (
             'kinerja' => $kinerja
@@ -23,24 +24,11 @@ class KinerjaController extends Controller
         return view ('data_kinerja.kinerja', compact('kinerja'))->with([$data,"user" => $user]);
     }
 
-    public function draft()
-    {
-        $user = Auth::User();
-        $kinerja = Kinerja::where('angka', '1')->paginate(31);
-        $data = array
-        (
-            'kinerja' => $kinerja
-        );
-
-        return view ('data_kinerja.draft', compact('kinerja'))->with([$data, "user" => $user]);
-    }
-
     public function restore($id)
     {
         $restore = Kinerja::find($id);
-        $restore->angka='0';
+        $restore->status='pending';
         $restore->save();
-        Alert::success('Berhasil', 'Data berhasil disubmit');
         return redirect('kinerja-pegawai');
     }
 
@@ -90,7 +78,7 @@ class KinerjaController extends Controller
             'hasil'    => 'required',
             'foto'       => 'required|mimes:jpeg,png,jpg',
             'doc'       => 'required|mimes:pdf',
-            'angka'     => 'required'
+            'status'     => 'required'
         ],
         [
             'hasil.required' => 'Hasil tidak boleh kosong!',
@@ -116,7 +104,7 @@ class KinerjaController extends Controller
             'doc' => $newDoc,
             'tgl' => $request->tgl,
             'hasil' => $request->hasil,
-            'angka' => $request->angka,
+            'status' => $request->status,
             'user_id' => Auth::user()->id
         ]);
         
