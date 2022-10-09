@@ -39,6 +39,47 @@ class KinerjaController extends Controller
             "user" => $user,
         ]);
     }
+    
+    public function edit(Request $request, $id)
+    {
+        $user = Auth::User();
+        $kinerja = Kinerja::find($id);
+        return view('data_kinerja.edit_kinerja', compact('kinerja'))->with([
+            "user" => $user,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'hasil'    => 'required',
+            'foto'       => 'mimes:jpeg,png,jpg',
+            'doc'       => 'mimes:pdf',
+        ],
+        [
+            'hasil.required' => 'Hasil tidak boleh kosong!',
+            'foto.required' => 'Foto harus diisi berupa jpg, png, jpeg!',
+            'doc.required' => 'Doc harus diisi berupa .pdf!',
+        ]);
+        $foto = $request->file('foto');
+        $newFoto = 'foto_kinerja' . '_' . time() . '.' . $foto->extension();
+
+        $doc = $request->file('doc');
+        $newDoc = 'doc_kinerja' . '_' . time() . '.' . $doc->extension();
+
+        $path = 'template/dist/img/kinerja/';
+        $request->foto->move(public_path($path), $newFoto);
+        $request->doc->move(public_path($path), $newDoc);
+
+        $kinerja = Kinerja::find($id);
+            $kinerja->foto = $newFoto;
+            $kinerja->doc = $newDoc;
+            $kinerja->hasil = $request->hasil;
+        $kinerja->update();
+
+        Alert::success('Berhasil', 'Data berhasil disimpan');
+        return redirect('/kinerja-pegawai');
+    }
 
     public function pengaturan()
     {
