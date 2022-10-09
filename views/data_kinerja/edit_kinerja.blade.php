@@ -17,7 +17,7 @@
   <div class="container-fluid">
     <div class="col-sm-12">
       <div class="card">
-              <form action="update/draft/{{ $kinerja->id }}" method="POST" enctype="multipart/form-data">
+              <form action="/update/draft/{{ $kinerja->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                   {{-- @method('PUT') --}}
