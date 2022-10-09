@@ -59,7 +59,7 @@
                   <td>
                     <div class="d-grid gap-2 d-md-block" style="text-align:center">
                       <a href="edit-draft/{{ $k->id }}" class="btn btn-warning"style="border-radius:30px;"><i class="fas fa-edit"></i></a>
-                      <a href="pegawai-hapus/{{ $k->id }}" class="btn btn-danger" style="border-radius:30px;"><i class="fas fa-trash" onclick="return confirm('Yakin hapus data?')"></i></a>
+                      <a href="/pegawai/hapus/{{ $k->id }}" class="btn btn-danger" style="border-radius:30px;"><i class="fas fa-trash" onclick="return confirm('Yakin hapus data?')"></i></a>
                       <a href="/restore/{{ $k->id }}" class="btn btn-success" style="border-radius:30px;" onclick="return confirm('PEHATIAN! Silahkan cek terlebih dahulu. Karena data yang disubmit tidak bisa diubah dan hapus')">Submit</a>
                     </div>
                   </td>
