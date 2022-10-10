@@ -315,12 +315,15 @@ $request->validate([
         ]);  
     }
 
-   public function updatepassword(Request $request, $id)
+    public function updatepassword(Request $request, $id)
     {
     // $user = Auth::User();
     $users = User::find($id);
-    if(!(Hash::check($request->password_lama, auth()->User()->password))){
-        return back()->with("error", "Password tidak sesuai!");
+    $password = auth()->user()->password;
+    $password_lama = request('password_lama');
+    if(Hash::check($password_lama, $password)){
+    } else {
+        return back()->withErrors(['password_lama'=>'Password tidak sesuai!']);
     }
     $request->validate([
         'password_lama' => 'required',
