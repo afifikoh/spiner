@@ -10,12 +10,15 @@ use Alert;
 
 class KinerjaController extends Controller
 {
-    public function index(Request $request)
+        public function index(Request $request)
     {
         $user = Auth::User();
         $pegawai = Auth::user()->id;
         $keyword = $request->keyword;
-        $kinerja = Kinerja::where('user_id',$pegawai)->where('hasil','LIKE', '%'.$keyword.'%')->paginate();
+        $kinerja = Kinerja::where('user_id',$pegawai)
+        ->where('status','=','draft')
+        ->orwhere('status','=','pending')
+        ->where('hasil','LIKE', '%'.$keyword.'%')->paginate();
         $data = array
         (
             'kinerja' => $kinerja
