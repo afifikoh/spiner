@@ -54,51 +54,94 @@ class KinerjaController extends Controller
 
     public function update(Request $request, $id)
     {
-        $tgl = $request->tgl;
-        $hasil = $request->hasil;
-        $foto = $request->foto;
-        $doc = $request->doc;
-
-        $validated = $request->validate([
-            'foto'       => 'mimes:jpeg,png,jpg',
-            'doc'       => 'mimes:pdf',
-        ]);
-
-        if ($request->hasFile('foto'))
+        $kinerja = Kinerja::find($id);
+        $newFoto = $kinerja->foto;
+        $newDoc = $kinerja->doc;
+        $pathFoto = public_path('template/dist/img/kinerja/ . $newFoto');
+        $pathDoc = public_path('template/dist/img/kinerja/ . $newDoc');
+        
+        if ($request->hasFile('foto','doc'))
         {
+            @unlink($pathFoto);
+            @unlink($pathDoc);
+
             $foto = $request->file('foto');
-            $newFoto = 'foto_kinerja' . '_' . time() . '.' . $foto->extension();
-
             $doc = $request->file('doc');
-            $newDoc = 'doc_kinerja' . '_' . time() . '.' . $doc->extension();
 
-            $path = 'template/dist/img/kinerja/';
-            // $request->foto->move(public_path($path), $newFoto);
-            // $request->doc->move(public_path($path), $newDoc);
+            $foto_ext = $foto->getClientOriginalExtension();
+            $doc_ext = $doc->getClientOriginalExtension();
+
+            $newFoto = 'foto_kinerja'  . '.' . $foto_ext;
+            $newDoc = 'doc_kinerja'  . '.' . $doc_ext;
+
+            $pathFoto = 'template/dist/img/kinerja/';
+            $pathDoc = 'template/dist/img/kinerja/';
+
+            $foto->move($pathFoto, $newFoto);
+            $doc->move($pathDoc, $newDoc);
+            $kinerja->foto = $newFoto;
+            $kinerja->doc = $newDoc;
         }
         else
         {
-            $newFoto = '';
-            $newDoc = '';
-        }
- 
-        $kinerja = Kinerja::find($id);
-        $pathFoto = $kinerja->foto;
-        $pathDoc = $kinerja->doc;
-        if ($pathFoto != null & $pathDoc != null || $pathFoto != '' & $pathDoc != '' )
-        {
-            $foto = 'template/dist/img/kinerja/'.$kinerja->foto;
-            $doc  = 'template/dist/img/kinerja/'.$kinerja->doc;
-            @unlink($foto);
-            @unlink($doc);
+            $kinerja->foto = $request->old_foto;
+            $kinerja->doc = $request->old_doc;
         }
 
-        $kinerja->foto = $newFoto;
-        $kinerja->doc = $newDoc;
         $kinerja->hasil = $request->hasil;
         $kinerja->save();
 
+        Alert::success('Berhasil', 'Data berhasil diubah');
+        return redirect('kinerja-pegawai');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'hasil'    => 'required',
+            'foto'       => 'required|mimes:jpeg,png,jpg',
+            'doc'       => 'required|mimes:pdf',
+            'status'     => 'required'
+        ],
+        [
+            'hasil.required' => 'Rincian kinerja tidak boleh kosong!',
+        ]);  
+
+        $foto = $request->file('foto');
+        $foto_ext = $foto->getClientOriginalExtension();
+        $newFoto = 'foto_kinerja'  . '.' . $foto_ext;
+
+        $doc = $request->file('doc');
+        $doc_ext = $doc->getClientOriginalExtension();
+        $newDoc = 'doc_kinerja'  . '.' . $doc_ext;
+
+        $path = 'template/dist/img/kinerja/';
+        $request->foto->move(public_path($path), $newFoto);
+        $request->doc->move(public_path($path), $newDoc);
+        Kinerja::create([
+            'foto' => $newFoto,
+            'doc' => $newDoc,
+            'tgl' => $request->tgl,
+            'hasil' => $request->hasil,
+            'status' => $request->status,
+            'user_id' => Auth::user()->id
+        ]);
+        
         Alert::success('Berhasil', 'Data berhasil disimpan');
+        return redirect('kinerja-pegawai');
+        
+    }
+
+    public function destroy($id, Request $request)
+    {
+        $kinerja = Kinerja::find($id);
+        $kinerja->delete();
+        $foto = 'template/dist/img/kinerja/'.$kinerja->foto;
+        $doc  = 'template/dist/img/kinerja/'.$kinerja->doc;
+        @unlink($foto);
+        @unlink($doc);
+        //File::delete($path);
+        Alert::success('Berhasil', 'Data berhasil dihapus');
         return redirect('kinerja-pegawai');
     }
 
@@ -132,64 +175,5 @@ class KinerjaController extends Controller
         return view('laporan_kinerja.lapkinerja_pgw')->with([
             "user" => $user,
         ]);
-    }
-
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'hasil'    => 'required',
-            'foto'       => 'required|mimes:jpeg,png,jpg',
-            'doc'       => 'required|mimes:pdf',
-            'status'     => 'required'
-        ],
-        [
-            'hasil.required' => 'Hasil tidak boleh kosong!',
-            'foto.required' => 'Foto tidak boleh kosong!',
-            'doc.required' => 'Doc harus diisi berupa .pdf!',
-        ]);  
-
-        $foto = $request->file('foto');
-        $newFoto = 'foto_kinerja' . '_' . time() . '.' . $foto->extension();
-
-        $doc = $request->file('doc');
-        $newDoc = 'doc_kinerja' . '_' . time() . '.' . $doc->extension();
-
-        $path = 'template/dist/img/kinerja/';
-        $request->foto->move(public_path($path), $newFoto);
-        $request->doc->move(public_path($path), $newDoc);
-        // $foto = $request->file('foto');
-        // $foto->storeAs('public/images', $foto->hashName());
-        // $doc = $request->file('doc');
-        // $doc->storeAs('public/images', $doc->hashName());
-        Kinerja::create([
-            'foto' => $newFoto,
-            'doc' => $newDoc,
-            'tgl' => $request->tgl,
-            'hasil' => $request->hasil,
-            'status' => $request->status,
-            'user_id' => Auth::user()->id
-        ]);
-        
-        //alert berhasil simpan draft atau submit
-        if($request->angka=='1'){
-        Alert::success('Berhasil', 'Data berhasil disimpan dalam draft');
-        return redirect('draft');
-        } else{
-        Alert::success('Berhasil', 'Data berhasil disimpan');
-        return redirect('kinerja-pegawai');
-        }
-    }
-
-    public function destroy($id, Request $request)
-    {
-        $kinerja = Kinerja::find($id);
-        $kinerja->delete();
-        $foto = 'template/dist/img/kinerja/'.$kinerja->foto;
-        $doc  = 'template/dist/img/kinerja/'.$kinerja->doc;
-        @unlink($foto);
-        @unlink($doc);
-        //File::delete($path);
-        Alert::success('Berhasil', 'Data berhasil dihapus');
-        return redirect('kinerja-pegawai');
     }
 }
