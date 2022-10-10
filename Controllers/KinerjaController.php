@@ -98,12 +98,14 @@ class KinerjaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'tgl'       => 'required',
             'hasil'    => 'required',
             'foto'       => 'required|mimes:jpeg,png,jpg',
             'doc'       => 'required|mimes:pdf',
             'status'     => 'required'
         ],
         [
+            'tgl.same' => 'Hanya boleh input sekali dalam sehari!',
             'hasil.required' => 'Rincian kinerja tidak boleh kosong!',
         ]);  
 
@@ -115,9 +117,10 @@ class KinerjaController extends Controller
         $doc_ext = $doc->getClientOriginalExtension();
         $newDoc = 'doc_kinerja'  . '.' . $doc_ext;
 
-        $path = 'template/dist/img/kinerja/';
-        $request->foto->move(public_path($path), $newFoto);
-        $request->doc->move(public_path($path), $newDoc);
+        $pathFoto = 'template/dist/img/kinerja/';
+        $pathDoc = 'template/dist/img/kinerja/';
+        $foto->move(public_path($pathFoto), $newFoto);
+        $doc->move(public_path($pathDoc), $newDoc);
         Kinerja::create([
             'foto' => $newFoto,
             'doc' => $newDoc,
@@ -126,10 +129,9 @@ class KinerjaController extends Controller
             'status' => $request->status,
             'user_id' => Auth::user()->id
         ]);
-        
+       
         Alert::success('Berhasil', 'Data berhasil disimpan');
-        return redirect('kinerja-pegawai');
-        
+        return redirect('kinerja-pegawai');   
     }
 
     public function destroy($id, Request $request)
