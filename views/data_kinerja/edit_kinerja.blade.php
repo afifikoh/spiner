@@ -40,7 +40,11 @@
                   </div>
                   <div class="form-group col-md-5">
                     <label for="foto">Bukti Foto</label><br>
+                    @if($kinerja->foto)
                     <a href="{{ asset('template/dist/img/kinerja/'.$kinerja['foto']) }}">Lihat Foto</a>
+                    @else
+                    <span class= "badge badge-danger">Belum ada foto</span>
+                    @endif
                     <div class="input-group">
                       <input type="file" class="form-control 
                       @error('foto')
@@ -56,7 +60,11 @@
                   </div>
                   <div class="form-group col-md-5">
                     <label for="foto">Bukti Documment .pdf</label><br>
+                    @if($kinerja->doc)
                     <a href="{{ asset('template/dist/img/kinerja/'.$kinerja['doc']) }}">Lihat Doc</a>
+                    @else
+                    <span class= "badge badge-danger">Belum ada documment</span>
+                    @endif
                     <div class="input-group">
                       <input type="file" class="form-control 
                       @error('doc')
