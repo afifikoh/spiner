@@ -60,26 +60,26 @@ class KinerjaController extends Controller
         $pathFoto = public_path('template/dist/img/kinerja/ . $newFoto');
         $pathDoc = public_path('template/dist/img/kinerja/ . $newDoc');
         
-        if ($request->hasFile('foto','doc'))
+        if ($request->hasFile('foto'))
         {
             @unlink($pathFoto);
+            
+            $foto = $request->file('foto');
+            $foto_ext = $foto->getClientOriginalExtension();
+            $newFoto = 'foto_kinerja'  . '.' . $foto_ext;
+            $pathFoto = 'template/dist/img/kinerja/';
+            $foto->move($pathFoto, $newFoto);
+            $kinerja->foto = $newFoto;
+        }
+        else if ($request->hasFile('doc'))
+        {
             @unlink($pathDoc);
 
-            $foto = $request->file('foto');
             $doc = $request->file('doc');
-
-            $foto_ext = $foto->getClientOriginalExtension();
             $doc_ext = $doc->getClientOriginalExtension();
-
-            $newFoto = 'foto_kinerja'  . '.' . $foto_ext;
             $newDoc = 'doc_kinerja'  . '.' . $doc_ext;
-
-            $pathFoto = 'template/dist/img/kinerja/';
             $pathDoc = 'template/dist/img/kinerja/';
-
-            $foto->move($pathFoto, $newFoto);
             $doc->move($pathDoc, $newDoc);
-            $kinerja->foto = $newFoto;
             $kinerja->doc = $newDoc;
         }
         else
