@@ -63,19 +63,19 @@ Route::group(["middleware" => ["auth"]], function () {
     Route::group(["middleware" => ["ceklevel:pegawai"]], function () {
         Route::get("kinerja-pegawai", [KinerjaController::class, 'index','store']);
         Route::get("edit-draft/{id}", [KinerjaController::class, 'edit']);
-        Route::post('/update/draft/{id}', [KinerjaController::class, 'update']);
+        Route::post('/update/draft/{id}', [KinerjaController::class, 'update']);        
         Route::get("restore/{id}", [KinerjaController::class, 'restore']);
         Route::get("pengaturan-pegawai", [KinerjaController::class, 'pengaturan']);
-        Route::get("edit-profil-pegawai/{id}", [PegawaiController::class, 'editprofil']);
+        Route::get("/edit-profil-pegawai/{id}", [PegawaiController::class, 'editprofil']);
         Route::post('/update/profil/pegawai/{id}', [PegawaiController::class, 'updateprofil']);
-        Route::get("edit-foto-profil/{id}", [PegawaiController::class, 'editfoto']);
+        Route::get("edit-foto-profil-pegawai/{id}", [PegawaiController::class, 'editfoto']);
         Route::post("/update/foto/profil/pegawai/{id}", [PegawaiController::class, 'updatefoto']);
         Route::get("edit-password-pegawai/{id}", [PegawaiController::class, 'editpassword']);
-        Route::post('/update/password/pegawai/{id}', [PegawaiController::class, 'updatepassword']);
-        Route::get("laporan-pegawai", [KinerjaController::class, 'laporan']);
+        Route::post("/update/password/pegawai/{id}", [PegawaiController::class, 'updatepassword']);
+        Route::get("laporan-pegawai", [LaporanController::class, 'laporan','tampilkan']);
         Route::get("tambah-kinerja", [KinerjaController::class, 'create']);
         Route::post("/kinerja-add", [KinerjaController::class, 'store']);
-        Route::get('pegawai/hapus/{id}', [KinerjaController::class, 'destroy'])->name('destroy');
+        Route::get("/pegawai/hapus/{id}", [KinerjaController::class, 'destroy'])->name('destroy');
         Route::resource("laporan-terverifikasi", LaporanController::class);
 
        
