@@ -136,10 +136,10 @@ class KinerjaController extends Controller
     {
         $kinerja = Kinerja::find($id);
         $kinerja->delete();
-        $foto = 'template/dist/img/kinerja/'.$kinerja->foto;
-        $doc  = 'template/dist/img/kinerja/'.$kinerja->doc;
-        @unlink($foto);
-        @unlink($doc);
+        $pathFoto = 'template/dist/img/kinerja/'.$kinerja->foto;
+        $pathDoc  = 'template/dist/img/kinerja/'.$kinerja->doc;
+        @unlink($pathFoto);
+        @unlink($pathDoc);
         //File::delete($path);
         Alert::success('Berhasil', 'Data berhasil dihapus');
         return redirect('kinerja-pegawai');
