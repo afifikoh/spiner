@@ -19,7 +19,7 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-gradient-green">
                 <div class="inner">
-                    <h1>3</h1>
+                    <h1>{{$dt_pgw}}</h1>
                     <p>Data Pegawai</p>
                 </div>
                 <div class="icon">
@@ -34,7 +34,7 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-gradient-fuchsia">
                 <div class="inner">
-                    <h1>5</h1>
+                    <h1>{{$bidang}}</h1>
                     <p>Bidang</p>
                 </div>
                 <div class="icon">
@@ -49,7 +49,7 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-gradient-cyan">
                 <div class="inner">
-                    <h1>2</h1>
+                    <h1>{{$laporan}}</h1>
                     <p>Laporan</p>
                 </div>
             <div class="icon">
@@ -83,7 +83,7 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-gradient-maroon">
                 <div class="inner">
-                    <h1>10</h1>
+                    <h1>{{laporan}}</h1>
                     <p>Laporan</p>
                 </div>
                 <div class="icon">
@@ -97,33 +97,13 @@
     </div>
 </div>
 
-@elseif($user->level == 'sub-koordinator')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-3 col-6">
-            <div class="small-box bg-gradient-blue">
-                <div class="inner">
-                    <h1>4</h1>
-                    <p>Kinerja Pegawai</p>
-                </div>
-                <div class="icon">
-                    <i class="ion fa fa-list-ol"></i>
-                </div>
-                <a href="{{ url('kinerja-koordinator') }}" class="small-box-footer"
-                    ><strong>Selengkapnya </strong> <i class="fas fa-arrow-circle-right"></i
-                ></a>
-            </div>
-        </div>
-    </div>
-</div>
-
 @elseif($user->level == 'kepala-bidang')
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-3 col-6">
             <div class="small-box bg-gradient-success">
                 <div class="inner">
-                    <h1>4</h1>
+                    <h1>{{lap_kepala}}</h1>
                     <p>Kinerja Pegawai</p>
                 </div>
                 <div class="icon">
