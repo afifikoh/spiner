@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Kinerja;
 
 class LaporanController extends Controller
 {
@@ -10,7 +13,8 @@ class LaporanController extends Controller
     {
         echo "Laporan";
     }
-     public function laporan(Request $request)
+    
+    public function laporan(Request $request)
     {
         $user = Auth::User();
         $pegawai = Auth::user()->id;
@@ -25,4 +29,20 @@ class LaporanController extends Controller
         return view('laporan_kinerja.lapkinerja_pgw',compact('kinerja'))->with([
             "user" => $user,
         ]);
+    }
+
+    public function tampilkan(Request $request)
+    {
+        $tglAwal = $request->input('tglAwal');
+        $tglAkhir = $request->input('tglAkhir');
+
+        $query = DB::table('kinerja')->select()
+                ->where('tgl','>=',$tglAwal)
+                ->where('tgl','<=',$tglAkhir)
+                ->get();
+
+        $laporan = DB::table('kinerja')
+                    ->select()->get();
+        return view('laporan_kinerja.lapkinerja_pgw', compact('query','laporan'));
+    }
 }
