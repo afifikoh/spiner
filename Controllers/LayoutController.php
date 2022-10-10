@@ -21,7 +21,7 @@ class LayoutController extends Controller
         $dt_pgw = User::all()->count();
         $bidang = Bidang::all()->count();
 
-        //Pegawai
+        //Pegawaicek
         $hasilkinerja = Kinerja::where('user_id',$pegawai)->count();
         $laporan = Kinerja::where('status', 'success')->where('user_id',$pegawai)->count();
 
