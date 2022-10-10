@@ -88,6 +88,13 @@ Route::group(["middleware" => ["auth"]], function () {
             "completedUpdate",
         ])->name("completedUpdate");
         Route::get("pengaturan-kepala", [PengaturanController::class, "index"]);
+        Route::get("pengaturan", [KepBidangController::class, 'pengaturan']);
+            Route::get("edit-profil-KepBidang/{id}", [KepBidangController::class, 'editprofil']);
+            Route::post('/update/profil/KepBidang/{id}', [KepBidangController::class, 'updateprofil']);
+            Route::get("edit-foto-profil-KepBidang/{id}", [KepBidangController::class, 'editfoto']);
+            Route::post("/update/foto/profil/KepBidang/{id}", [KepBidangController::class, 'updatefoto']);
+            Route::get("edit-password-KepBidang/{id}", [KepBidangController::class, 'editpassword']);
+            Route::post("/update/password/KepBidang/{id}", [KepBidangController::class, 'updatepassword']);
     });
 });
 
