@@ -3,8 +3,8 @@
 @section('judul')
 <div class="content-header">
     <div class="container-fluid">
-      <div class="col-sm-11">
-          <h1 class="md-0">Laporan Data Kinerja Pegawai</h1><br>
+      <div class="col-sm-12">
+          <h1 class="md-0">Laporan Data Kinerja Pegawai</h1><br> 
           <form action="tampilkan" method="POST">
                       <div class="form-row">
                           <div class="form-group col-md-2">
@@ -20,8 +20,9 @@
                             <button type="submit" class="btn btn-primary" name="tampilkan">Tampilkan</button>
                          </div>
           </form>
-          <div class="col box-header text-right" style="float: right; ">
-              <a class="btn btn-success btn-sm">&nbsp;&nbsp;&nbsp;<b>Export PDF&nbsp;&nbsp;&nbsp;</b><p><i class="far fa-file-pdf"></i></p></a>
+          <div class="float-right col-md-2" style="padding-top: 31px">
+          {{-- <div class="col box-header text-right" style="float: right; "> --}}
+              <a class="btn btn-warning mr-auto">&nbsp;&nbsp;&nbsp;<b>Export PDF&nbsp;&nbsp;&nbsp;</b><i class="far fa-file-pdf"></i></a>
           </div><!-- /.col -->
         </div><!-- /.col -->
       </div><!-- /.row -->
