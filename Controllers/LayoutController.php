@@ -15,8 +15,19 @@ class LayoutController extends Controller
     public function index()
     {
         $user = Auth::User();
-        $pegawai = Auth::User()->id;
-        $hasilkinerja = Kinerja::where('angka','0')->where('user_id',$pegawai)->count();
+        $pegawai = Auth::user()->id;
+
+        //Admin
+        $dt_pgw = User::all()->count();
+        $bidang = Bidang::all()->count();
+
+        //Pegawai
+        $hasilkinerja = Kinerja::where('user_id',$pegawai)->count();
+        $laporan = Kinerja::where('status', 'success')->where('user_id',$pegawai)->count();
+
+        //Kepala Bidang
+        $lap_kepala = Kinerja::where('status', 'pending')->count();
+        
         $jml_pending = DB::table("kinerja")
             ->where("status", "pending")
             // ->where("id", $user->bidang)
@@ -36,7 +47,11 @@ class LayoutController extends Controller
                 "jml_dt_pegawai",
                 "jml_bidang",
                 "terverifikasi",
-                'hasilkinerja'
+                "dt_pgw",
+                "bidang",
+                "lap_kepala",
+                "hasilkinerja",
+                "laporan"
             )
         )->with([
             "user" => $user,
