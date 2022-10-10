@@ -5,19 +5,19 @@
     <div class="container-fluid">
       <div class="col-sm-11">
           <h1 class="md-0">Laporan Data Kinerja Pegawai</h1><br>
-          <form>
+          <form action="tampilkan" method="POST">
                       <div class="form-row">
                           <div class="form-group col-md-2">
                               <label for="tglawal">Tanggal Awal</label>
-                              <input type="date" class="form-control" id="tglawal">
+                              <input type="date" class="form-control" id="tglawal" name="tglAwal">
                           </div>
                           &nbsp;<a style="padding-top: 40px">s/d</a>&nbsp;
                           <div class="form-group col-md-2">
                               <label for="tglakhir">Tanggal Akhir</label>
-                               <input type="date" class="form-control" id="tglakhir">
+                               <input type="date" class="form-control" id="tglakhir" name="tglAkhir">
                           </div>
-                          <div class="form-group col-md-2" style="padding-top: 40px;">           
-                            <button type="submit" class="btn btn-primary">Tampilkan</button>
+                          <div class="form-group col-md-2" style="padding-top: 31px;">           
+                            <button type="submit" class="btn btn-primary" name="tampilkan">Tampilkan</button>
                          </div>
           </form>
           <div class="col box-header text-right" style="float: right; ">
@@ -51,6 +51,22 @@
               </tr>
             </thead>
             {{-- <tbody> --}}
+              <tbody>
+                @php $no = 1; @endphp
+                @foreach ($kinerja as $k)
+                <tr class="odd">
+                  <td class="text-center">{{$no++}}</td>
+                  <td class="text-center">{{$k->tgl}}</td>
+                  <td class="text-center">{{$k->hasil}}</td>
+                  <td class="text-center">
+                    <a href="{{ asset('template/dist/img/kinerja/'.$k['foto']) }}" class="btn btn-rounded btn-info" style="border-radius:30px;"><i class="far fa-file-image"></i></a>
+                  </td>
+                  <td class="text-center">
+                  <a href="{{ asset('template/dist/img/kinerja/'.$k['doc']) }}" class="btn btn-rounded btn-info" style="border-radius:30px;"><i class="far fa-file-pdf"></i></a>
+                  </td>
+                </tr>
+                @endforeach
+              </tbody>
           </table>
         </div>
     </div>
