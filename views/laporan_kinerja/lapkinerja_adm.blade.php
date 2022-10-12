@@ -17,9 +17,7 @@
                                <input type="date" class="form-control" id="tglakhir">
                           </div>
           </form>
-          <div class="col box-header text-right" style="float: right; ">
-              <a class="btn btn-success btn-sm">&nbsp;&nbsp;&nbsp;<b>Export PDF&nbsp;&nbsp;&nbsp;</b><p><i class="far fa-file-pdf"></i></p></a>
-          </div><!-- /.col -->
+         
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -37,14 +35,15 @@
         <div class="card-body">
           <div class="row">
             <div class="col-sm-12">
-              <table id="dt-table" class="table table-bordered table-hover ">
+              <div class="table table-responsive">
+              <table id="dt_table" class="table table-bordered table-hover ">
             <thead>
               <tr>
                 <th style="text-align:center">No</th>
                 <th style="text-align:center">Nama</th>
+                <th style="text-align:center">Bidang</th>
                 <th style="text-align:center">Tgl</th>
-                <th style="text-align:center">Hasil</th>
-                <th style="text-align:center">Foto</th>
+                <th style="text-align:center">Rincian Kinerja</th>
                 <th style="text-align:center">Doc</th>
               </tr>
             </thead>
@@ -55,16 +54,23 @@
                 <tr class="odd">
                   
                   <td>{{ $no++ }}</td>
-                  <td>{{ $data->nama_pgw->nama }}</td>
-                  <td>{{ $data['tgl'] }}</td>
-                  <td>{{ $data['hasil'] }}</td>
-                  <td class="text-center"><a href="{{ asset('template/dist/img/kinerja/'.$data['foto']) }}" class="btn btn-rounded btn-info style="border-radius:30px;""><i class="far fa-file-image"></i></a></td>
-                  <td class="text-center"><a href="{{ asset('template/dist/img/kinerja/'.$data['doc']) }}" class="btn btn-rounded btn-info style="border-radius:30px;""><i class="far fa-file-pdf"></i></a></td>                  
+                  <td>{{ $data->nama }}</td>
+                  <td>{{ $data->bidang }}</td>
+                  <td>{{ $data->tgl }}</td>
+                  <td>{{ $data->hasil }}</td>
+                  
+                  <td class="text-center">
+                    <a href="{{ asset('template/dist/img/kinerja/'.$data->foto) }}" class="btn btn-rounded btn-info style="border-radius:30px;""><i class="far fa-file-image"></i></a>
+                    <a href="{{ asset('template/dist/img/kinerja/'.$data->doc) }}" class="btn btn-rounded btn-info style="border-radius:30px;""><i class="far fa-file-pdf"></i></a>
+                  </td>                  
                 
                 </tr>
                 @endforeach
               </tbody>
           </table>
+
+          
+              </div>
         </div>
     </div>
         </div>
