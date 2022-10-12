@@ -7,6 +7,7 @@ use App\Models\Bidang;
 use App\Models\User;
 use App\Models\Kinerja;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
