@@ -98,14 +98,14 @@ class KinerjaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'tgl'       => 'required',
+            'tgl'       => 'required|unique:kinerja,tgl,except,id',
             'hasil'    => 'required',
             'foto'       => 'required|mimes:jpeg,png,jpg',
             'doc'       => 'required|mimes:pdf',
             'status'     => 'required'
         ],
         [
-            'tgl.same' => 'Hanya boleh input sekali dalam sehari!',
+            'tgl.unique' => 'Hanya boleh input sekali dalam sehari!',
             'hasil.required' => 'Rincian kinerja tidak boleh kosong!',
         ]);  
 
