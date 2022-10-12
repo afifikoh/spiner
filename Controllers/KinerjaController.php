@@ -18,7 +18,7 @@ class KinerjaController extends Controller
         $kinerja = Kinerja::where('user_id',$pegawai)
         ->where('status','=','draft')
         ->orwhere('status','=','pending')
-        ->where('hasil','LIKE', '%'.$keyword.'%')->paginate();
+        ->where('hasil','LIKE', '%'.$keyword.'%')->Latest()->paginate();
         $data = array
         (
             'kinerja' => $kinerja
