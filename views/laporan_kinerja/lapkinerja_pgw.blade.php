@@ -21,7 +21,7 @@
                          </div>
           </form>
          <div class="col box-header text-right" style="float: right; padding-top: 31px;">
-              <a class="btn btn-warning">&nbsp;&nbsp;&nbsp;<b>Export PDF&nbsp;&nbsp;&nbsp;</b><i class="far fa-file-pdf"></i></a>
+              <a href="cetak-kinerja" class="btn btn-warning">&nbsp;&nbsp;&nbsp;<b>Export PDF&nbsp;&nbsp;&nbsp;</b><i class="far fa-file-pdf"></i></a>
           </div><!-- /.col -->
         </div><!-- /.col -->
       </div><!-- /.row -->
