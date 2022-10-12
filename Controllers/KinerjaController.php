@@ -26,6 +26,23 @@ class KinerjaController extends Controller
 
         return view ('data_kinerja.kinerja', compact('kinerja'))->with([$data,"user" => $user]);
     }
+        
+    public function cetakKinerja(Request $request)
+    {
+        $user = Auth::User();
+        $pegawai = Auth::user()->id;
+        $keyword = $request->keyword;
+        $kinerja = Kinerja::where('user_id',$pegawai)
+        ->where('status','=','success')
+        ->where('hasil','LIKE', '%'.$keyword.'%')->get();
+        $data = array
+        (
+            'kinerja' => $kinerja
+        );
+        return view('data_kinerja.cetak',compact('kinerja'))->with([
+            "user" => $user,
+        ]);
+    }
 
     public function restore($id)
     {
