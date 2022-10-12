@@ -20,9 +20,8 @@
                             <button type="submit" class="btn btn-primary" name="tampilkan">Tampilkan</button>
                          </div>
           </form>
-          <div class="float-right col-md-2" style="padding-top: 31px">
-          {{-- <div class="col box-header text-right" style="float: right; "> --}}
-              <a class="btn btn-warning mr-auto">&nbsp;&nbsp;&nbsp;<b>Export PDF&nbsp;&nbsp;&nbsp;</b><i class="far fa-file-pdf"></i></a>
+         <div class="col box-header text-right" style="float: right; padding-top: 31px;">
+              <a class="btn btn-warning">&nbsp;&nbsp;&nbsp;<b>Export PDF&nbsp;&nbsp;&nbsp;</b><i class="far fa-file-pdf"></i></a>
           </div><!-- /.col -->
         </div><!-- /.col -->
       </div><!-- /.row -->
