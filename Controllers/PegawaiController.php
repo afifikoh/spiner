@@ -353,9 +353,28 @@ $request->validate([
     public function laporan(Request $request)
     {
         $user = Auth::User();
-        $kinerja = Kinerja::with('nama_pgw')->where('angka', '0')->where('status', 'success')->paginate(31);
+        $kinerja = DB::table("kinerja")
+            ->leftJoin("users", "kinerja.user_id", "=", "users.id")
+            ->where("kinerja.status", "=", "success")
+            ->where("users.level", "=", "pegawai")
+            ->where("users.bidang", "=", $user->bidang)
+            ->leftJoin("bidang","users.bidang","=","bidang.id")
+            ->select(
+                "users.nama",
+                "kinerja.id",
+                "kinerja.hasil",
+                "kinerja.foto",
+                "kinerja.doc",
+                "kinerja.tgl",
+                
+                "kinerja.status",
+                "bidang.bidang"
+
+            )
+            ->get();
         return view('laporan_kinerja.lapkinerja_adm', compact('kinerja'))->with([
             "user" => $user,
         ]);
+        
     }
 }
