@@ -35,9 +35,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-12">
-                    <a href="laporan-pegawai" class="btn btn-primary" class="btn btn-rounded btn-info" style="border-radius:30px;"><i class="fas fa-arrow-left"></i></a>
-                    <p align="center"><b>Laporan Data Kinerja</b></p>
-                    <p align="center">Klik CTRL+P untuk cetak PDF</p>
+                    <h5 align="center"><b>Laporan Data Kinerja</b></h5><br>
                     <table class="table table-bordered table-hover ">
                         <tr>
                             <th style="text-align:center">No</th>
