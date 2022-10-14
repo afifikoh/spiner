@@ -77,6 +77,7 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::post("/kinerja-add", [KinerjaController::class, 'store']);
         Route::get("/pegawai/hapus/{id}", [KinerjaController::class, 'destroy'])->name('destroy');
         Route::resource("laporan-terverifikasi", LaporanController::class);
+        Route::get("cetak-kinerja", [KinerjaController::class, 'cetakKinerja']);
 
        
     });
