@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\ServiceProvider;
+use Carbon\Carbon;
 use App\Models\Kinerja;
 use App\Models\Bidang;
 use App\Models\User;
@@ -114,6 +116,10 @@ class KinerjaController extends Controller
 
     public function store(Request $request)
     {
+        config(['app.locale' => 'id']);
+        Carbon::setLocale('id');
+        date_default_timezone_set('Asia/Jakarta');
+            
         $validated = $request->validate([
             'tgl'       => 'required|unique:kinerja,tgl,except,id',
             'hasil'    => 'required',
