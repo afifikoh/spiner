@@ -31,17 +31,22 @@ class KinerjaController extends Controller
         
     public function cetakKinerja(Request $request)
     {
+        $tglAwal = Carbon::parse(request('tglAwal'))->format('d/m/Y');
+        $tglAkhir = Carbon::parse(request('tglAkhir'))->format('d/m/Y');
         $user = Auth::User();
         $pegawai = Auth::user()->id;
         $keyword = $request->keyword;
         $kinerja = Kinerja::where('user_id',$pegawai)
         ->where('status','=','success')
-        ->where('hasil','LIKE', '%'.$keyword.'%')->get();
+        ->where('hasil','LIKE', '%'.$keyword.'%')
+        ->whereBetween('tgl', [$tglAwal, $tglAkhir])
+        ->get();
+
         $data = array
         (
             'kinerja' => $kinerja
         );
-        return view('data_kinerja.cetak',compact('kinerja'))->with([
+        return view('data_kinerja.cetak',compact('kinerja'))->with([$data,
             "user" => $user,
         ]);
     }
