@@ -1,39 +1,24 @@
 @extends('layout.main')
 
 @section('judul')
-<div class="content-header">
+<div class="content-header">  
     <div class="container-fluid">
       <div class="col-sm-12">
-          <h1 class="md-0">Laporan Data Kinerja Pegawai</h1><br> 
-          <form action="tampilkan" method="POST">
-                      <div class="form-row">
-                          <div class="form-group col-md-2">
-                              <label for="tglawal">Tanggal Awal</label>
-                              <input type="date" class="form-control" id="tglawal" name="tglAwal">
-                          </div>
-                          &nbsp;<a style="padding-top: 40px">s/d</a>&nbsp;
-                          <div class="form-group col-md-2">
-                              <label for="tglakhir">Tanggal Akhir</label>
-                               <input type="date" class="form-control" id="tglakhir" name="tglAkhir">
-                          </div>
-                          <div class="form-group col-md-2" style="padding-top: 31px;">           
-                            <button type="submit" class="btn btn-primary" name="tampilkan">Tampilkan</button>
-                         </div>
-          </form>
-         <div class="col box-header text-right" style="float: right; padding-top: 31px;">
-              <a href="cetak-kinerja" class="btn btn-warning">&nbsp;&nbsp;&nbsp;<b>Export PDF&nbsp;&nbsp;&nbsp;</b><i class="far fa-file-pdf"></i></a>
-          </div><!-- /.col -->
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-  </div>
+        <h1 class="md-0">Laporan Data Kinerja Pegawai</h1><br> 
+          <div class="row">
+            <div class="col box-header" style="">
+              <a href="#" class="btn btn-success btn-filter"><i class="far fa-file-pdf"></i>&nbsp;&nbsp;&nbsp;<b>Print&nbsp;&nbsp;&nbsp;</b></a>
+            </div><!-- /.col -->
+          </div>
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
   
 @endsection
 
 @section('isi')
     
 <div class="container-fluid">
-   
         <!-- /.card-header -->
     <div class="col-sm-12">
       <div class="card">
@@ -67,14 +52,49 @@
                 </tr>
                 @endforeach
               </tbody>
-          </table>
-        </div>
-    </div>
+            </table>
+          </div>
         </div>
       </div>
     </div>
+  </div>
         <!-- /.card-body -->
+</div>
+<div class="modal fade" id="modal-filter" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+      <div class="modal-dialog modal-default modal-dialog-centered modal-" role="document">
+        <div class="modal-content">
+ 
+          <div class="modal-header">
+            <h6 class="modal-title" id="modal-title-notification">Pilih Periode Tanggal</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+<div class="modal-body">
+  <form role="form" target="__blank" enctype="multipart/form-data" action="{{url('cetak-kinerja')}}" method="get">
+    <div class="box-body">
+      <div class="form-group">
+        <label for="date">Tanggal Awal</label>
+        <input type="date" class="form-control"  name="tglAwal">
       </div>
+      <div class="form-group">
+        <label for="date">Tanggal Akhir</label>
+        <input type="date" class="form-control" name="tglAkhir">
+      </div>
+    </div>
+    <!-- /.box-body -->
+
+    <div class="box-footer">
+      <button type="submit" class="btn btn-success">Print</button>
+      {{-- <a type="submit "class="btn btn-success">&nbsp;&nbsp;&nbsp;<b>Print&nbsp;&nbsp;&nbsp;</b></a> --}}
+
+    </div>
+  </form>
+
+</div>
+</div>
+</div>
+</div>
 
       <!-- CONTENT -->
       @endsection
