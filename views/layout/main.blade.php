@@ -154,6 +154,25 @@
   })
 </script>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    
+      // btn refresh
+      $('.btn-refresh').click(function(e){
+          e.preventDefault();
+          $('.preloader').fadeIn();
+          location.reload();
+      })
+
+      $('.btn-filter').click(function(e){
+          e.preventDefault();
+         
+          $('#modal-filter').modal();
+        })
+        
+      })
+      </script>
+
 </body>
 </html>
 
