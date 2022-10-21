@@ -120,46 +120,54 @@ class KinerjaController extends Controller
     }
 
     public function store(Request $request)
-    {
-        config(['app.locale' => 'id']);
-        Carbon::setLocale('id');
-        date_default_timezone_set('Asia/Jakarta');
-            
-        $validated = $request->validate([
-            'tgl'       => 'required|unique:kinerja,tgl,except,id',
-            'hasil'    => 'required',
-            'foto'       => 'required|mimes:jpeg,png,jpg',
-            'doc'       => 'required|mimes:pdf',
-            'status'     => 'required'
-        ],
-        [
-            'tgl.unique' => 'Hanya boleh input sekali dalam sehari!',
-            'hasil.required' => 'Rincian kinerja tidak boleh kosong!',
-        ]);  
-
-        $foto = $request->file('foto');
-        $foto_ext = $foto->getClientOriginalExtension();
-        $newFoto = 'foto_kinerja'  . '.' . $foto_ext;
-
-        $doc = $request->file('doc');
-        $doc_ext = $doc->getClientOriginalExtension();
-        $newDoc = 'doc_kinerja'  . '.' . $doc_ext;
-
-        $pathFoto = 'template/dist/img/kinerja/';
-        $pathDoc = 'template/dist/img/kinerja/';
-        $foto->move(public_path($pathFoto), $newFoto);
-        $doc->move(public_path($pathDoc), $newDoc);
-        Kinerja::create([
-            'foto' => $newFoto,
-            'doc' => $newDoc,
+    {          
+        $kinerja = Kinerja::where([
             'tgl' => $request->tgl,
-            'hasil' => $request->hasil,
-            'status' => $request->status,
-            'user_id' => Auth::user()->id
+            'user_id' => Auth()->id(),
         ]);
-       
-        Alert::success('Berhasil', 'Data berhasil disimpan');
-        return redirect('kinerja-pegawai');   
+        
+        if($kinerja->count() > 0)
+        {    
+            return redirect('kinerja-pegawai');
+        }
+        else
+        {
+            config(['app.locale' => 'id']);
+            Carbon::setLocale('id');
+            date_default_timezone_set('Asia/Jakarta');
+            $validated = $request->validate([
+                'tgl'       => 'required',
+                'hasil'    => 'required',
+                'doc'       => 'required|mimes:pdf',
+                'status'     => 'required'
+            ],
+            [
+                'hasil.required' => 'Rincian kinerja tidak boleh kosong!',
+            ]);  
+    
+            $foto = $request->file('foto');
+            $foto_ext = $foto->getClientOriginalExtension();
+            $newFoto = 'foto_kinerja'  . '.' . $foto_ext;
+    
+            $doc = $request->file('doc');
+            $doc_ext = $doc->getClientOriginalExtension();
+            $newDoc = 'doc_kinerja'  . '.' . $doc_ext;
+    
+            $pathFoto = 'template/dist/img/kinerja/';
+            $pathDoc = 'template/dist/img/kinerja/';
+            $foto->move(public_path($pathFoto), $newFoto);
+            $doc->move(public_path($pathDoc), $newDoc);
+            Kinerja::create([
+                'foto' => $newFoto,
+                'doc' => $newDoc,
+                'tgl' => $request->tgl,
+                'hasil' => $request->hasil,
+                'status' => $request->status,
+                'user_id' => Auth()->id(),
+            ]);
+            Alert::success('Berhasil', 'Data berhasil disimpan');
+            return redirect('kinerja-pegawai');            
+        }
     }
 
     public function destroy($id, Request $request)
