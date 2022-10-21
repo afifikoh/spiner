@@ -88,6 +88,7 @@ class KinerjaController extends Controller
         
         if($kinerja->count() > 0)
         {    
+            alert::error('Gagal','Anda hanya dapat mengisi 1 kali per hari ');
             return redirect('kinerja-pegawai');
         }
         else
