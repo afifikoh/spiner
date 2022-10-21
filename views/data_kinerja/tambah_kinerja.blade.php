@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.main', ['title'=>'Tambah Kinerja'])
 
 @section('judul')
 <div class="content-header">
@@ -26,7 +26,15 @@
                   
                   <div class="form-group col-md-2">
                     <label for="tgl">Tanggal</label><span class="text-danger">*</span>
-                    <input type="text" id="tgl" name="tgl" class="form-control" readonly value="{{ date("d/m/Y") }}" data-target="#tgl" data-toggle="datetimepicker">
+                    <input type="text" id="tgl" name="tgl" class="form-control
+                    @error('tgl')
+                    is-invalid
+                    @enderror" readonly value="{{ date("d/m/Y") }}" data-target="#tgl" data-toggle="datetimepicker">
+                    @error('tgl')
+                      <div class='invalid-feedback'>
+                        {{ $message }}
+                      </div>
+                    @enderror
                   </div>
                   <div class="form-group col-md-5">
                     <label for="hasil">Rincian Kinerja</label><span class="text-danger">*</span>
@@ -35,10 +43,10 @@
                     is-invalid
                     @enderror" id="hasil" name="hasil" rows="4" placeholder="Masukkan Rincian Kinerja"></textarea>
                     @error('hasil')
-                          <div class='invalid-feedback'>
-                             {{ $message }}
-                          </div>
-                      @enderror
+                      <div class='invalid-feedback'>
+                        {{ $message }}
+                      </div>
+                    @enderror
                   </div>
                   <div class="form-group col-md-5">
                   {{-- <img src="{{ template(img) }}" height="128"> --}}
@@ -70,17 +78,17 @@
                     </div>
                     <input hidden type="status" class="form-control" id="status" name="status" value="pending">
                   </div>   
+                  <div class="float-left">
+                    <label class="btn btn-primary">
+                      <input type="radio" name="status" id="option1" value="pending" onclick="return confirm('PEHATIAN! Silahkan cek terlebih dahulu. Karena data yang disubmit tidak bisa diubah dan hapus')"> Submit
+                    </label>
+                    <label class="btn btn-warning">
+                      <input type="radio" name="status" id="option2" value="draft" onclick="return confirm('Simpan sebagai draft?')"> Draft
+                    </label>
+                  </div>
                   <div class="float-right"> 
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                      <label class="btn btn-primary">
-                        <input type="radio" name="status" id="option1" value="pending" onclick="return confirm('PEHATIAN! Silahkan cek terlebih dahulu. Karena data yang disubmit tidak bisa diubah dan hapus')"> Submit
-                      </label>
-                      <label class="btn btn-warning">
-                        <input type="radio" name="status" id="option2" value="draft" onclick="return confirm('Simpan sebagai draft?')"> Draft
-                      </label>
-                      <button type="submit" class="btn btn-success">Simpan</button>
-                      <a href="kinerja-pegawai"><i class="btn btn-light">Batal</i></a> 
-                    </div> 
+                    <button type="submit" class="btn btn-success">Simpan</button>
+                    <a href="kinerja-pegawai"><i class="btn btn-light">Batal</i></a> 
                   </div>
                 </div>
                 <!-- /.card-body -->
