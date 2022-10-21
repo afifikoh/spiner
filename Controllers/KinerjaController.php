@@ -18,8 +18,7 @@ class KinerjaController extends Controller
         $pegawai = Auth::user()->id;
         $keyword = $request->keyword;
         $kinerja = Kinerja::where('user_id',$pegawai)
-        ->where('status','=','draft')
-        ->orwhere('status','=','pending')
+        ->whereIn('status',['draft','pending'])
         ->where('hasil','LIKE', '%'.$keyword.'%')->Latest()->paginate();
         $data = array
         (
