@@ -87,14 +87,16 @@
     </script>
                     <input hidden type="status" class="form-control" id="status" name="status" value="pending">
                   </div>   
-                  <div class="float-left">
+                 <div class="form-group">
+                  <div class="float-left form-check">
                     <label class="btn btn-primary">
-                      <input type="radio" name="status" id="option1" value="pending" onclick="return confirm('PEHATIAN! Silahkan cek terlebih dahulu. Karena data yang disubmit tidak bisa diubah dan hapus')"> Submit
+                      <input type="radio" name="status" id="status" name="status" id="option1" value="pending" class="form-input" onclick="return confirm('PERHATIAN! Silahkan cek terlebih dahulu. Karena data yang disubmit tidak bisa diubah dan hapus')" required> Submit
                     </label>
                     <label class="btn btn-warning">
-                      <input type="radio" name="status" id="option2" value="draft" onclick="return confirm('Simpan sebagai draft?')"> Draft
+                      <input type="radio" name="status" id="option2" value="draft" class="form-input" onclick="return confirm('Simpan sebagai draft?')" required> Draft
                     </label>
                   </div>
+                </div>
                   <div class="float-right"> 
                     <button type="submit" class="btn btn-success">Simpan</button>
                     <a href="kinerja-pegawai"><i class="btn btn-light">Batal</i></a> 
