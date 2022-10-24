@@ -49,33 +49,42 @@
                     @enderror
                   </div>
                   <div class="form-group col-md-5">
-                  {{-- <img src="{{ template(img) }}" height="128"> --}}
-                    <label for="foto">Bukti Foto</label><span class="text-danger">*</span>
-                    <div class="input-group">
-                      <input type="file" class="form-control 
-                      @error('foto')
-                      is-invalid
-                      @enderror" id="foto" name="foto">
-                      @error('foto')
-                          <div class='invalid-feedback'>
-                             {{ $message }}
-                          </div>
-                      @enderror
-                    </div>
-                  </div>
-                  <div class="form-group col-md-5">
-                    <label for="doc">Bukti Document (.pdf)</label><span class="text-danger">*</span>
-                    <div class="input-group">
-                      <input type="file" class="form-control '
-                      @error('doc')
-                      is-invalid
-                      @enderror" id="doc" name="doc">
-                      @error('doc')
-                          <div class='invalid-feedback'>
-                             {{ $message }}
-                          </div>
-                      @enderror
-                    </div>
+    <label for="foto">Bukti Foto</label>
+        <div class="custom-file
+            @error('foto')
+                is-invalid
+            @enderror">
+              <input type="file" class="custom-file-input" name="foto" id="foto">
+              <label class="custom-file-label" for="foto">Choose file</label>
+        </div>
+            @error('foto')
+              <div class='invalid-feedback'>
+                {{ $message }}
+              </div>
+            @enderror
+  </div>
+  <div class="form-group col-md-5">
+    <label for="doc">Bukti Document</label><span class="text-danger">*</span>
+        <div class="custom-file
+            @error('doc')
+                is-invalid
+            @enderror">
+              <input type="file" class="custom-file-input" name="doc" id="doc">
+              <label class="custom-file-label" for="doc">Choose file</label>
+        </div>
+            @error('doc')
+              <div class='invalid-feedback'>
+                {{ $message }}
+              </div>
+            @enderror
+  </div>
+    <script>
+      // Add the following code if you want the name of the file appear on select
+      $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+      });
+    </script>
                     <input hidden type="status" class="form-control" id="status" name="status" value="pending">
                   </div>   
                   <div class="float-left">
