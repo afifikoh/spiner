@@ -43,10 +43,19 @@
                   <td class="text-center">{{$no++}}</td>
                   <td class="text-center">{{$k->tgl}}</td>
                   <td class="text-center">{{$k->hasil}}</td>
+
+                  @if($k->foto == null)
+                    <td class="text-center">  
+                    <a href="{{ asset('template/dist/img/kinerja/'.$k['doc']) }}" class="btn btn-rounded btn-info" style="border-radius:30px;"><i class="far fa-file-pdf"></i></a>
+                    </td>
+                  
+                  @else
                   <td class="text-center">
                     <a href="{{ asset('template/dist/img/kinerja/'.$k['foto']) }}" class="btn btn-rounded btn-info" style="border-radius:30px;"><i class="far fa-file-image"></i></a>
                     <a href="{{ asset('template/dist/img/kinerja/'.$k['doc']) }}" class="btn btn-rounded btn-info" style="border-radius:30px;"><i class="far fa-file-pdf"></i></a>
-                  </td>
+                  </td> 
+                  @endif
+                  
                   @if ($k->status == 'pending')
                     <td class="text-center">
                       <div class="badge {{ $k->status == "pending" ? "badge-warning" : "badge-success" }}">{{ $k->status }}</div></td>
