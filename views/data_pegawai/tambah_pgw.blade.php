@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.main', ['title'=>'Tambah Pegawai'])
 
 @section('judul')
 <section class="content-header">
@@ -24,26 +24,14 @@
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            {{-- <label hidden for="nip">NIP</label>
-                                            <input hidden type="text" name='nip' autocomplete="off" class="form-control
-                                            @error('nip')
-                                                is-invalid
-                                            @enderror
-                                            " id="nip" placeholder="Masukan NIP" >
-                                            @error('nip')
-                                                <div class='invalid-feedback'>
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror --}}
                                             <label for="level">Level</label>
-                                            <select name="level" class="custom-select 
+                                            <select name="level" id="levels" class="custom-select 
                                             @error('level')
                                             is-invalid
                                             @enderror
                                             " id="level" placeholder="- Pilih Level -" value="{{ old('level') }}" >
                                                 <option>- pilih Level -</option>
                                                 <option value="kepala-bidang">Kepala Bidang</option>
-                                                {{-- <option value="sub-koordiator">Sub Koordinator</option> --}}
                                                 <option value="pegawai">Pegawai</option>
                                             </select>
                                             @error('level')
@@ -56,20 +44,15 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="nip">NIP</label>
-                                            <select name="nip" class="custom-select
+                                            <select name="nip" id="nips" class="custom-select
                                             @error('nip')
                                             is-invalid
                                             @enderror" id="bidang" placeholder="- Pilih NIP -" value="{{ old('nip') }}">
-                                                <option>- Pilih NIP jika Kepala Bidang -</option>
+                                                <option>- Pilih NIP -</option>
                                                 @foreach ($bidang as $data)
                                                     <option value="{{ $data->nip }}"> {{ $data->bidang }} </option>
                                                 @endforeach
                                             </select>
-                                            {{-- <input type="text" name='nip' autocomplete="off" class="form-control
-                                            @error('nip')
-                                                is-invalid
-                                            @enderror
-                                            " id="nip" placeholder="Masukan NIP" value=""> --}}
                                             @error('nip')
                                                 <div class='invalid-feedback'>
                                                     {{ $message }}
@@ -166,11 +149,7 @@
                                                 </div>
                                             @enderror
                                         </div>
-                                        <script type="text/javascript">
-                                            $('.date').datepicker({  
-                                               format: 'yyyy mm dd'
-                                             });  
-                                        </script> 
+                                     
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
@@ -326,26 +305,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    {{-- <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label for="level">Level</label>
-                                            <select name="level" class="custom-select 
-                                            @error('level')
-                                            is-invalid
-                                            @enderror
-                                            " id="level" placeholder="- Pilih Level -" value="{{ old('level') }}" >
-                                                <option>- pilih Level -</option>
-                                                <option value="kepala-bidang">Kepala Bidang</option>
-                                                <option value="sub-koordiator">Sub Koordinator</option>
-                                                <option value="pegawai">Pegawai</option>
-                                            </select>
-                                            @error('level')
-                                                <div class='invalid-feedback'>
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                    </div> --}}
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <div class="custome file @error('foto')
@@ -371,7 +330,7 @@
                                         <button type="submit" class="btn btn-primary float-right">Simpan</button>
                                     </div>
                                     <div class="col-sm-1">
-                                        <button type="cancel" class="btn btn-default float-right">Batal</button>
+                                        <button type="" class="btn btn-default float-sm"><a href="{{ url('pegawai') }}">Batal</a></button>
                                     </div>
                                 </div>   
                             </form>
@@ -384,3 +343,21 @@
     
 </section>
 @endsection
+
+@push('footer-script')
+<script type="text/javascript">
+$('#levels').on('change', function(){
+    if(this.value == 'kepala-bidang'){
+        $('#nips').prop('disabled', false);
+        
+    }else{
+        $('#nips').prop('disabled', true);
+    }
+    
+});
+    $('.date').datepicker({  
+       format: 'yyyy-mm-dd',
+       autoclose: true
+     });
+  </script>
+@endpush
