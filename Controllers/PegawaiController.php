@@ -351,29 +351,52 @@ $request->validate([
         return redirect('pegawai')->with(['success'=>'Data Berhasil Dihapus!']);
     }
     
-    public function laporan(Request $request)
+    public function laporan_pegawai(Request $request)
     {
+        // $list_pegawai = DB::table("users")->where("level","pegawai")->get();
+        
         $user = Auth::User();
-        $kinerja = DB::table("kinerja")
+        // $users = User::find($id);
+        $pgw = DB::table("users")
+            ->leftJoin("bidang", "users.bidang", "=", "bidang.id")
+            ->where("users.level", "=", "pegawai")
+            ->select(
+                "users.id",
+                "users.nama",
+                "bidang.bidang"
+            )
+            ->get();
+        return view('laporan_kinerja.data_kinerja', compact('pgw'))->with([
+            "user" => $user,
+        ]);
+    }
+    
+    public function laporan(Request $request, $id)
+    {
+        // $list_pegawai = DB::table("users")->where("level","=","pegawai")->get();
+
+        $user = Auth::User();
+        $users = User::find($id);
+        $pgw = DB::table("kinerja")
             ->leftJoin("users", "kinerja.user_id", "=", "users.id")
             ->where("kinerja.status", "=", "success")
             ->where("users.level", "=", "pegawai")
+            ->where("kinerja.user_id","=",$users->id)
             ->where("users.bidang", "=", $user->bidang)
             ->leftJoin("bidang","users.bidang","=","bidang.id")
             ->select(
                 "users.nama",
+                "users.id",
                 "kinerja.id",
                 "kinerja.hasil",
                 "kinerja.foto",
                 "kinerja.doc",
                 "kinerja.tgl",
-                
                 "kinerja.status",
                 "bidang.bidang"
-
             )
             ->get();
-        return view('laporan_kinerja.lapkinerja_adm', compact('kinerja'))->with([
+        return view('laporan_kinerja.lapkinerja_adm', compact('pgw','users'))->with([
             "user" => $user,
         ]);
         
