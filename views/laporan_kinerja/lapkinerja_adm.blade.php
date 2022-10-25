@@ -1,26 +1,14 @@
-@extends('layout.main')
+@extends('layout.main', ['title'=>'Laporan Kinerja'])
 
 @section('judul')
 <div class="content-header">
     <div class="container-fluid">
-      <div class="col-sm-11">
+      <div class="row mb-2">
+        <div class="col-sm-11">
           <h1 class="md-0">Laporan Data Kinerja Pegawai</h1><br>
-          <form>
-                      <div class="form-row">
-                          <div class="form-group col-md-2">
-                              <label for="tglawal">Tanggal Awal</label>
-                              <input type="date" class="form-control" id="tglawal">
-                          </div>
-                          &nbsp;<a style="padding-top: 40px">s/d</a>&nbsp;
-                          <div class="form-group col-md-2">
-                              <label for="tglakhir">Tanggal Akhir</label>
-                               <input type="date" class="form-control" id="tglakhir">
-                          </div>
-          </form>
-         
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+        </div>
+      </div>
+    </div>
   </div>
   
 @endsection
@@ -31,6 +19,23 @@
    
         <!-- /.card-header -->
     <div class="col-sm-12">
+      <div class="card-header">
+        {{-- <form action="GET">
+          <div class="col-sm-4">
+          <div class="form-group">
+              <label for="pegawai">Pegawai</label>
+              <select name="nama" class="custom-select filter" id="filter-pegawai">
+                  <option>- Pilih Pegawai -</option>
+                  @foreach ($kinerja as $data)
+                      <option value="{{ $data->id }}"> {{ $data->nama }} </option>
+                  @endforeach
+              </select>
+          </div>
+        </form> --}}
+        
+      </div>
+
+      </div>
       <div class="card">
         <div class="card-body">
           <div class="row">
@@ -50,7 +55,7 @@
             {{-- <tbody> --}}
               <tbody>
                 @php $no=1; @endphp
-                @foreach ($kinerja as $data)
+                @foreach ($pgw as $data)
                 <tr class="odd">
                   
                   <td>{{ $no++ }}</td>
@@ -70,14 +75,14 @@
           </table>
 
           
-              </div>
-        </div>
-    </div>
-        </div>
       </div>
+     </div>
     </div>
+   </div>
+  </div>
+ </div>
         <!-- /.card-body -->
-      </div>
+</div>
 
       <!-- CONTENT -->
       @endsection
