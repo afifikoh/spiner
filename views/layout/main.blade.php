@@ -3,13 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="{{ url('http://127.0.0.1:8000/img/logo1.ico') }}">
-  <title>Spiner</title>
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+  <link rel="icon" href="{{ asset('template/dist/img/logo.png') }}">
+  <title>{{$title}}</title>
+
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -19,12 +15,19 @@
   <link rel="stylesheet" href="{{asset('/')}}plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="{{asset('/')}}plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <link rel="stylesheet" href="{{asset('/')}}plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+  <!-- Daterange: -->
+  <link rel="stylesheet" href="{{ asset('/') }}plugins/daterangepicker/daterangepicker.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('/') }}dist/css/adminlte.min.css">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
+  @include('sweetalert::alert')
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
@@ -102,7 +105,6 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
   <footer class="main-footer text-center">
     <strong>Copyright &copy; 2022 <strong class="text-danger">
         <a href="https://kominfo.cilacapkab.go.id/">Diskominfo Cilacap</a>
@@ -118,7 +120,8 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="{{ asset('/') }}plugins/jquery/jquery.min.js"></script>
+{{-- <script src="{{ asset('/') }}plugins/jquery/jquery.min.js"></script> --}}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('/') }}plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
@@ -130,11 +133,13 @@
 <script src="{{ asset('/') }}plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="{{ asset('/') }}plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="{{ asset('/') }}plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+{{-- Date --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+<script src="{{ asset('/') }}plugins/moment/moment.min.js"></script>
+<script src="{{ asset('/') }}plugins/inputmask/jquery.inputmask.min.js"></script>
+<script src="{{ asset('/') }}plugins/daterangepicker/daterangepicker.js"></script>
 
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script> --}}
+@stack('footer-script')
 
 <script>
   $('#dt_table').dataTable();
@@ -142,16 +147,24 @@
   $('#bd_pegawai').on('click','.detail',function(){
     let id = $(this).data('id');
     $.ajax({
-      url :'get-pegawai',
+    url : 'get-pegawai',
       data:{a:id},
       type:'GET',
       dataType:'JSON',
       success:function(){
-        $('#modal-pegawai').modal('show');
+        
+        $('#modal-pegawai').modal('show') ;
+        
 
       }
     })
   })
+</script>
+
+<script>
+  $('#dt-table').dataTable({
+    lengthMenu: [5, 10, 20, 50, 100],
+  });
 </script>
 
 <script type="text/javascript">
@@ -163,7 +176,6 @@
           $('.preloader').fadeIn();
           location.reload();
       })
-
       $('.btn-filter').click(function(e){
           e.preventDefault();
          
@@ -172,7 +184,5 @@
         
       })
       </script>
-
 </body>
 </html>
-
