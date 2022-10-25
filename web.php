@@ -42,7 +42,8 @@ Route::group(["middleware" => ["auth"]], function () {
         Route::get("pegawai", [PegawaiController::class, 'index','store']);
         Route::get('tambah-pegawai', [PegawaiController::class,'create']);
         Route::post('pegawai-add', [PegawaiController::class,'store']);
-        Route::get("laporan-pegawai-admin", [PegawaiController::class, 'laporan']);
+         Route::get("lapkinerja-pgwadmin", [PegawaiController::class, 'laporan_pegawai']);
+        Route::get("lapkinerja-admin/{id}", [PegawaiController::class, 'laporan']);
 
         Route::get('edit-pegawai/{id}', [PegawaiController::class,'edit']);
         Route::post('/pegawai/update/{id}', [PegawaiController::class,'update']);
