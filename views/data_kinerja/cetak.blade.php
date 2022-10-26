@@ -35,24 +35,29 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-12">
-                    <h5 align="center"><b>Laporan Data Kinerja</b></h5><br>
+                    <h5 align="center"><b>REKAP KEGIATAN HARIAN TENAGA AHLI</b></h5>
+                    <h5 align="center"><b>DISKOMINFO KAB.CILACAP</b></h5><br>
+                    <p><b>Nama    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b>&nbsp;{{$nama}}</p>
+                    <p><b>Bidang  &nbsp;&nbsp;&nbsp;:</b>&nbsp;{{$bidang}}</p>
                     <table class="table table-bordered table-hover ">
                         <tr>
                             <th style="text-align:center">No</th>
                             <th style="text-align:center">Tgl</th>
                             <th style="text-align:center">Rincian Kinerja</th>
-                            <th style="text-align:center">Doc</th>
                         </tr>
+                    @if($cetakdata < 1)
+                        <td style="text-align:center">-</td>
+                        <td style="text-align:center">-</td>
+                        <td style="text-align:center">Tidak ada data pada periode ini</td>
+                    @else
                     @foreach ($kinerja as $k)
                     <tr>
                         <td style="text-align:center">{{ $loop->iteration }}</td>
                         <td style="text-align:center">{{ $k->tgl }}</td>
                         <td style="text-align:center">{{ $k->hasil }}</td>
-                        <td style="text-align:center">
-                            <a href="{{ asset('template/dist/img/kinerja/'.$k['foto']) }}" class="btn btn-rounded btn-info" style="border-radius:30px;"><i class="far fa-file-image"></i></a>
-                            <a href="{{ asset('template/dist/img/kinerja/'.$k['doc']) }}" class="btn btn-rounded btn-info" style="border-radius:30px;"><i class="far fa-file-image"></i></a>
                     </tr> 
                     @endforeach
+                    @endif
                     </table>
                 </div>
             </div>
