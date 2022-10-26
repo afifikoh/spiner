@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.main', ['title'=>'Laporan Pegawai'])
 
 @section('judul')
 <div class="content-header">  
@@ -31,7 +31,6 @@
                 <th style="text-align:center">No</th>
                 <th style="text-align:center">Tgl</th>
                 <th style="text-align:center">Hasil</th>
-                <th style="text-align:center">Foto</th>
                 <th style="text-align:center">Doc</th>
               </tr>
             </thead>
@@ -45,8 +44,6 @@
                   <td class="text-center">{{$k->hasil}}</td>
                   <td class="text-center">
                     <a href="{{ asset('template/dist/img/kinerja/'.$k['foto']) }}" class="btn btn-rounded btn-info" style="border-radius:30px;"><i class="far fa-file-image"></i></a>
-                  </td>
-                  <td class="text-center">
                   <a href="{{ asset('template/dist/img/kinerja/'.$k['doc']) }}" class="btn btn-rounded btn-info" style="border-radius:30px;"><i class="far fa-file-pdf"></i></a>
                   </td>
                 </tr>
